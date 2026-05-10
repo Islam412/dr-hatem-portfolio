@@ -1,12 +1,10 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { FaLanguage, FaBars, FaTimes, FaMoon, FaSun } from 'react-icons/fa';
+import { FaLanguage, FaBars, FaTimes } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
-import { useTheme } from '../context/ThemeContext';
 
 const Navbar = () => {
   const { t, i18n } = useTranslation();
-  const { darkMode, toggleDarkMode } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -26,16 +24,18 @@ const Navbar = () => {
       animate={{ y: 0 }} 
       transition={{ duration: 0.5, type: 'spring' }}
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? 'glass-effect shadow-lg' : 'bg-white/80 dark:bg-gray-900/80'
+        scrolled 
+          ? 'bg-black/80 backdrop-blur-xl border-b border-blue-500/30 shadow-2xl' 
+          : 'bg-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 py-4">
         <div className="flex justify-between items-center">
           <motion.h1 
             whileHover={{ scale: 1.05 }}
-            className="text-2xl md:text-3xl font-bold text-gradient cursor-pointer"
+            className="text-2xl md:text-3xl font-bold cursor-pointer"
           >
-            Dr. Hatem Abdel Kafy
+            <span className="animated-gradient-text">Dr. Hatem Abdel Kafy</span>
           </motion.h1>
           
           {/* Desktop Menu */}
@@ -47,38 +47,30 @@ const Navbar = () => {
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 }}
-                className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-300 font-medium relative group"
+                className="text-gray-300 hover:text-blue-400 transition-colors duration-300 font-medium relative group"
               >
                 {t(`nav.${link}`)}
-                <span className="absolute inset-x-0 bottom-0 h-0.5 bg-blue-600 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
+                <span className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span>
               </motion.a>
             ))}
             
-            <button 
-              onClick={toggleDarkMode}
-              className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:scale-110 transition-all"
-            >
-              {darkMode ? <FaSun className="text-yellow-500" /> : <FaMoon className="text-gray-700" />}
-            </button>
-            
-            <button 
+            <motion.button 
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={toggleLang}
-              className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:shadow-lg transition-all hover:scale-105"
+              className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:shadow-lg hover:shadow-blue-500/50 transition-all"
             >
               <FaLanguage />
               <span className="font-medium">{i18n.language === 'ar' ? 'English' : 'العربية'}</span>
-            </button>
+            </motion.button>
           </div>
           
           {/* Mobile Menu Button */}
-          <div className="md:hidden flex gap-2">
+          <div className="md:hidden">
             <button 
-              onClick={toggleDarkMode}
-              className="p-2 rounded-full bg-gray-200 dark:bg-gray-700"
+              onClick={() => setIsOpen(!isOpen)} 
+              className="text-2xl text-white p-2 rounded-lg glass-card"
             >
-              {darkMode ? <FaSun /> : <FaMoon />}
-            </button>
-            <button onClick={() => setIsOpen(!isOpen)} className="text-2xl">
               {isOpen ? <FaTimes /> : <FaBars />}
             </button>
           </div>
@@ -91,14 +83,14 @@ const Navbar = () => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="md:hidden mt-4 flex flex-col gap-4 pb-4"
+              className="md:hidden mt-4 flex flex-col gap-4 pb-4 glass-card p-4"
             >
               {navLinks.map((link) => (
                 <a 
                   key={link}
                   href={`#${link}`} 
                   onClick={() => setIsOpen(false)}
-                  className="text-gray-700 dark:text-gray-300 hover:text-blue-600 transition-colors py-2"
+                  className="text-gray-300 hover:text-blue-400 transition-colors py-2"
                 >
                   {t(`nav.${link}`)}
                 </a>
