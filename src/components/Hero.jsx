@@ -1,14 +1,14 @@
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { FaStethoscope, FaAward, FaHospital, FaArrowRight, FaSparkles } from 'react-icons/fa';
+import { FaStethoscope, FaAward, FaHospital, FaArrowRight, FaStar, FaMagic } from 'react-icons/fa';
 
 const Hero = () => {
   const { t } = useTranslation();
 
   // تأثير الجسيمات
-  const particles = Array.from({ length: 50 }, (_, i) => ({
+  const particles = Array.from({ length: 30 }, (_, i) => ({
     id: i,
-    size: Math.random() * 4 + 2,
+    size: Math.random() * 3 + 1,
     left: Math.random() * 100,
     delay: Math.random() * 10,
     duration: Math.random() * 10 + 10
@@ -24,7 +24,7 @@ const Hero = () => {
         {particles.map((particle) => (
           <div
             key={particle.id}
-            className="particle absolute"
+            className="absolute rounded-full bg-blue-500/30"
             style={{
               width: `${particle.size}px`,
               height: `${particle.size}px`,
@@ -32,7 +32,6 @@ const Hero = () => {
               top: `${Math.random() * 100}%`,
               animation: `float ${particle.duration}s ease-in-out infinite`,
               animationDelay: `${particle.delay}s`,
-              opacity: Math.random() * 0.5
             }}
           />
         ))}
@@ -56,14 +55,6 @@ const Hero = () => {
           transition={{ duration: 20, repeat: Infinity }}
           className="absolute bottom-20 -right-48 w-96 h-96 rounded-full bg-purple-500/20 blur-3xl"
         />
-        <motion.div
-          animate={{
-            x: [0, 100, -100, 0],
-            y: [0, 50, -50, 0],
-          }}
-          transition={{ duration: 25, repeat: Infinity }}
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 rounded-full bg-pink-500/10 blur-3xl"
-        />
       </div>
 
       <div className="max-w-7xl mx-auto px-6 py-20 relative z-10">
@@ -78,12 +69,12 @@ const Hero = () => {
               transition={{ duration: 2, repeat: Infinity }}
               className="inline-flex items-center gap-2 glass-card px-4 py-2 rounded-full mb-6 border border-blue-500/50"
             >
-              <FaSparkles className="text-yellow-500 animate-pulse" />
+              <FaStar className="text-yellow-500 animate-pulse" />
               <span className="text-blue-400 font-semibold text-sm">استشاري عالمي معتمد</span>
             </motion.div>
             
             <h1 className="text-5xl md:text-7xl font-bold mb-6">
-              <span className="animated-gradient-text">{t('hero.title')}</span>
+              <span className="animated-gradient-text">Dr. Hatem Abdel Kafy</span>
             </h1>
             
             <p className="text-2xl text-gray-300 mb-4 neon-text">{t('hero.subtitle')}</p>
@@ -139,6 +130,9 @@ const Hero = () => {
                 src="/doctor-main.jpg" 
                 alt="Dr. Hatem Abdel Kafy"
                 className="w-full h-auto object-cover transform hover:scale-105 transition-transform duration-500"
+                onError={(e) => {
+                  e.target.src = 'https://via.placeholder.com/600x400?text=Dr.+Hatem';
+                }}
               />
             </div>
             
@@ -160,6 +154,14 @@ const Hero = () => {
           </motion.div>
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes float {
+          0%, 100% { transform: translateY(0px) translateX(0px); }
+          25% { transform: translateY(-20px) translateX(10px); }
+          75% { transform: translateY(10px) translateX(-10px); }
+        }
+      `}</style>
     </section>
   );
 };

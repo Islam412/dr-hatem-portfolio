@@ -1,59 +1,54 @@
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { FaSyringe, FaMicroscope, FaFlask, FaVial } from 'react-icons/fa';
+import { FaSyringe, FaMicroscope, FaFlask, FaVial, FaMagic } from 'react-icons/fa';
 
 const Procedures = () => {
   const { t } = useTranslation();
   
   const proceduresList = [
-    { key: 'joint_injection', icon: <FaSyringe />, color: 'bg-blue-500', image: '/joint-injection.jpg' },
-    { key: 'muscle_biopsy', icon: <FaMicroscope />, color: 'bg-green-500', image: '/muscle-biopsy.jpg' },
-    { key: 'lab_tests', icon: <FaFlask />, color: 'bg-purple-500', image: '/lab-tests.jpg' },
-    { key: 'immunotherapy', icon: <FaVial />, color: 'bg-red-500', image: '/immunotherapy.jpg' }
+    { key: 'joint_injection', icon: <FaSyringe />, desc: 'حقن دقيقة باستخدام الموجات فوق الصوتية' },
+    { key: 'muscle_biopsy', icon: <FaMicroscope />, desc: 'أخذ عينة لتشخيص دقيق' },
+    { key: 'lab_tests', icon: <FaFlask />, desc: 'تحاليل شاملة لأمراض المناعة' },
+    { key: 'immunotherapy', icon: <FaVial />, desc: 'علاج متقدم للمناعة الذاتية' }
   ];
 
   return (
-    <section id="procedures" className="py-20 px-6 bg-white">
-      <div className="max-w-7xl mx-auto">
+    <section id="procedures" className="py-20 px-6 relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-900/5 to-transparent"></div>
+      
+      <div className="max-w-7xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: -30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">
+          <FaMagic className="text-5xl text-purple-400 mx-auto mb-4 animate-pulse" />
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 animated-gradient-text">
             {t('procedures.title')}
           </h2>
-          <p className="text-gray-600 text-lg">{t('procedures.subtitle')}</p>
+          <p className="text-gray-400 text-lg">{t('procedures.subtitle')}</p>
         </motion.div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {proceduresList.map((procedure, index) => (
             <motion.div
               key={procedure.key}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              whileHover={{ y: -10 }}
+              initial={{ opacity: 0, scale: 0.8, rotateX: -30 }}
+              whileInView={{ opacity: 1, scale: 1, rotateX: 0 }}
+              whileHover={{ y: -5 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              className="bg-gray-50 rounded-xl overflow-hidden shadow-lg group"
+              className="glass-card p-6 text-center group hover:glowing-card"
             >
-              <div className={`${procedure.color} h-32 flex items-center justify-center`}>
-                <div className="text-5xl text-white">
-                  {procedure.icon}
-                </div>
+              <div className="text-6xl text-blue-400 mb-4 group-hover:scale-110 group-hover:text-purple-400 transition-all inline-block">
+                {procedure.icon}
               </div>
-              <div className="p-6 text-center">
-                <h3 className="text-lg font-bold text-gray-800 mb-2">
-                  {t(`procedures.${procedure.key}`)}
-                </h3>
-                <p className="text-gray-600 text-sm">
-                  {procedure.key === 'joint_injection' && 'حقن دقيقة باستخدام الموجات فوق الصوتية'}
-                  {procedure.key === 'muscle_biopsy' && 'أخذ عينة لتشخيص دقيق'}
-                  {procedure.key === 'lab_tests' && 'تحاليل شاملة لأمراض المناعة'}
-                  {procedure.key === 'immunotherapy' && 'علاج متقدم للمناعة الذاتية'}
-                </p>
-              </div>
+              <h3 className="text-lg font-bold text-white mb-2">
+                {t(`procedures.${procedure.key}`)}
+              </h3>
+              <p className="text-gray-400 text-sm">
+                {procedure.desc}
+              </p>
             </motion.div>
           ))}
         </div>

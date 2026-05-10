@@ -22,23 +22,23 @@ i18n.use(initReactI18next).init({
           subtitle: 'Comprehensive care for rheumatic and autoimmune conditions',
           rheumatoid: {
             name: 'Rheumatoid Arthritis',
-            desc: 'Chronic inflammatory disorder affecting joints'
+            desc: 'Chronic inflammatory disorder that primarily affects joints'
           },
           lupus: {
             name: 'Systemic Lupus Erythematosus',
-            desc: 'Autoimmune disease affecting multiple organs'
+            desc: 'Autoimmune disease where the immune system attacks its own tissues'
           },
           fibro: {
             name: 'Fibromyalgia',
-            desc: 'Widespread musculoskeletal pain with fatigue'
+            desc: 'Widespread musculoskeletal pain accompanied by fatigue and sleep issues'
           },
           autoimmune: {
             name: 'Autoimmune Diseases',
-            desc: 'Immune system attacking healthy cells'
+            desc: 'Conditions where the immune system mistakenly attacks healthy cells'
           },
           arthritis: {
             name: 'Inflammatory Arthritis',
-            desc: 'Joint inflammation and stiffness'
+            desc: 'Joint inflammation and stiffness causing pain and reduced mobility'
           }
         },
         procedures: {
@@ -59,8 +59,7 @@ i18n.use(initReactI18next).init({
           phone: 'Phone',
           whatsapp: 'WhatsApp',
           location: 'Saudi German Hospital - Egypt',
-          email: 'Email',
-          working_hours: 'Working Hours: Sat-Thu 10 AM - 6 PM'
+          email: 'Email'
         },
         footer: {
           rights: 'All rights reserved',
@@ -80,30 +79,30 @@ i18n.use(initReactI18next).init({
         hero: { 
           title: 'دكتور حاتم عبد الكافي', 
           subtitle: 'استشاري الروماتيزم والمناعة',
-          credentials: 'زميل الكلية الملكية البريطانية'
+          credentials: 'زميل الكلية الملكية البريطانية - استشاري أول'
         },
         diseases: { 
           title: 'الأمراض التي نعالجها',
           subtitle: 'رعاية شاملة لأمراض الروماتيزم والمناعة',
           rheumatoid: {
             name: 'الروماتويد المفصلي',
-            desc: 'اضطراب التهابي مزمن يصيب المفاصل'
+            desc: 'اضطراب التهابي مزمن يصيب المفاصل بشكل رئيسي'
           },
           lupus: {
             name: 'الذئبة الحمراء',
-            desc: 'مرض مناعي ذاتي يصيب أعضاء متعددة'
+            desc: 'مرض مناعي ذاتي حيث يهاجم الجهاز المناعي أنسجة الجسم'
           },
           fibro: {
             name: 'الفيبروميالجيا',
-            desc: 'آلام عضلية منتشرة مع إرهاق'
+            desc: 'آلام عضلية منتشرة مصحوبة بالإرهاق واضطرابات النوم'
           },
           autoimmune: {
             name: 'أمراض المناعة الذاتية',
-            desc: 'جهاز المناعة يهاجم الخلايا السليمة'
+            desc: 'حالات يهاجم فيها الجهاز المناعي الخلايا السليمة بالخطأ'
           },
           arthritis: {
             name: 'التهابات المفاصل',
-            desc: 'التهاب وتيبس المفاصل'
+            desc: 'التهاب وتيبس المفاصل مما يسبب ألماً وصعوبة في الحركة'
           }
         },
         procedures: {
@@ -124,8 +123,7 @@ i18n.use(initReactI18next).init({
           phone: 'هاتف',
           whatsapp: 'واتساب',
           location: 'المستشفى السعودي الألماني - مصر',
-          email: 'البريد الإلكتروني',
-          working_hours: 'ساعات العمل: السبت-الخميس 10 ص - 6 م'
+          email: 'البريد الإلكتروني'
         },
         footer: {
           rights: 'جميع الحقوق محفوظة',
