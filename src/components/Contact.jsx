@@ -18,10 +18,10 @@ const Contact = () => {
   });
 
   const socialLinks = [
-    { icon: <FaFacebook />, url: 'https://www.facebook.com/share/18kkYqig5N/', name: 'Facebook', color: 'bg-blue-600', glow: 'shadow-blue-500/50' },
-    { icon: <FaInstagram />, url: 'https://www.instagram.com/dr.hatem.abdelkafy', name: 'Instagram', color: 'bg-pink-600', glow: 'shadow-pink-500/50' },
-    { icon: <FaTiktok />, url: 'https://www.tiktok.com/@hatemabdelkafy', name: 'TikTok', color: 'bg-gray-800', glow: 'shadow-gray-500/50' },
-    { icon: <FaWhatsapp />, url: 'https://wa.me/201069927168', name: 'WhatsApp', color: 'bg-green-600', glow: 'shadow-green-500/50' }
+    { icon: <FaFacebook />, url: 'https://www.facebook.com/share/18kkYqig5N/', name: 'فيسبوك', color: 'bg-blue-600', glow: 'shadow-blue-500/50' },
+    { icon: <FaInstagram />, url: 'https://www.instagram.com/dr.hatem.abdelkafy', name: 'إنستجرام', color: 'bg-pink-600', glow: 'shadow-pink-500/50' },
+    { icon: <FaTiktok />, url: 'https://www.tiktok.com/@hatemabdelkafy', name: 'تيك توك', color: 'bg-gray-800', glow: 'shadow-gray-500/50' },
+    { icon: <FaWhatsapp />, url: 'https://wa.me/201069927168', name: 'واتساب', color: 'bg-green-600', glow: 'shadow-green-500/50' }
   ];
 
   const contactInfo = [
@@ -29,7 +29,7 @@ const Contact = () => {
       icon: <FaPhoneAlt />, 
       label: 'الهاتف', 
       value: '+20 106 992 7168', 
-      displayValue: '+20 106 992 7168',
+      rawValue: '+201069927168',
       href: 'tel:+201069927168', 
       color: 'from-blue-500 to-blue-600' 
     },
@@ -37,7 +37,7 @@ const Contact = () => {
       icon: <FaWhatsapp />, 
       label: 'واتساب', 
       value: '+20 106 992 7168', 
-      displayValue: '+20 106 992 7168',
+      rawValue: '+201069927168',
       href: 'https://wa.me/201069927168', 
       color: 'from-green-500 to-green-600' 
     },
@@ -45,7 +45,7 @@ const Contact = () => {
       icon: <FaEnvelope />, 
       label: 'البريد الإلكتروني', 
       value: 'info@drhatem.com', 
-      displayValue: 'info@drhatem.com',
+      rawValue: 'info@drhatem.com',
       href: 'mailto:info@drhatem.com', 
       color: 'from-purple-500 to-purple-600' 
     },
@@ -53,7 +53,7 @@ const Contact = () => {
       icon: <FaMapMarkerAlt />, 
       label: 'الموقع', 
       value: 'المستشفى السعودي الألماني - مصر', 
-      displayValue: 'المستشفى السعودي الألماني - مصر',
+      rawValue: 'المستشفى السعودي الألماني - مصر',
       href: '#', 
       color: 'from-red-500 to-red-600' 
     }
@@ -174,39 +174,42 @@ const Contact = () => {
             transition={{ duration: 0.6 }}
             className="space-y-4"
           >
-            {/* Contact Cards with Better Number Display */}
+            {/* Contact Cards - Number under label */}
             <div className="glass-card p-6 rounded-2xl">
               <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
                 <FaUserMd className="text-blue-400" />
                 معلومات التواصل
               </h3>
-              <div className="space-y-3">
+              <div className="space-y-4">
                 {contactInfo.map((info, index) => (
                   <motion.a
                     key={index}
                     href={info.href}
                     whileHover={{ scale: 1.02, x: 5 }}
-                    className="flex items-center gap-4 p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-all group"
+                    className="flex items-start gap-4 p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-all group"
                   >
-                    <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${info.color} flex items-center justify-center text-white text-xl`}>
+                    <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${info.color} flex items-center justify-center text-white text-xl shrink-0`}>
                       {info.icon}
                     </div>
                     <div className="flex-1">
-                      <p className="text-xs text-gray-400 mb-1">{info.label}</p>
-                      <p className="text-lg md:text-xl font-bold text-white tracking-wide">
-                        {info.label === 'الهاتف' || info.label === 'واتساب' ? (
-                          <>
-                            <span className="text-blue-400">+20</span>
-                            <span className="mx-1">106</span>
-                            <span className="mx-1">992</span>
-                            <span>7168</span>
-                          </>
-                        ) : (
-                          info.displayValue
-                        )}
-                      </p>
+                      <p className="text-sm text-gray-400 mb-1">{info.label}</p>
+                      {(info.label === 'الهاتف' || info.label === 'واتساب') ? (
+                        <div className="flex flex-col gap-1">
+                          <div className="flex items-center gap-1 flex-wrap" dir="ltr">
+                            <span className="text-blue-400 text-xl font-bold">+20</span>
+                            <span className="text-white text-xl font-bold">106</span>
+                            <span className="text-white text-xl font-bold">992</span>
+                            <span className="text-white text-xl font-bold">7168</span>
+                          </div>
+                          <p className="text-xs text-gray-500">متاح 24 ساعة</p>
+                        </div>
+                      ) : (
+                        <p className="text-white text-lg font-bold">
+                          {info.value}
+                        </p>
+                      )}
                     </div>
-                    <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition">
+                    <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition shrink-0">
                       <FaArrowRight className="text-gray-400 group-hover:text-white transition-colors text-sm" />
                     </div>
                   </motion.a>
@@ -214,7 +217,7 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* Working Hours - Improved */}
+            {/* Working Hours */}
             <div className="glass-card p-6 rounded-2xl">
               <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
                 <FaClock className="text-green-400" />
@@ -226,7 +229,7 @@ const Contact = () => {
                     <p className="text-gray-300 font-semibold">السبت - الأربعاء</p>
                     <p className="text-xs text-gray-500">طوال الأسبوع</p>
                   </div>
-                  <div className="text-left">
+                  <div className="text-left" dir="ltr">
                     <p className="text-white font-bold text-lg">10:00 ص - 8:00 م</p>
                     <p className="text-xs text-green-400">متاح للاستشارات</p>
                   </div>
@@ -236,7 +239,7 @@ const Contact = () => {
                     <p className="text-gray-300 font-semibold">الخميس</p>
                     <p className="text-xs text-gray-500">آخر الأسبوع</p>
                   </div>
-                  <div className="text-left">
+                  <div className="text-left" dir="ltr">
                     <p className="text-white font-bold text-lg">10:00 ص - 4:00 م</p>
                     <p className="text-xs text-yellow-400">مواعيد محدودة</p>
                   </div>
@@ -254,21 +257,21 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* Quick Copy - Enhanced */}
+            {/* Quick Copy - Proper Number Display */}
             <div className="glass-card p-6 rounded-2xl bg-gradient-to-r from-blue-600/20 to-purple-600/20 border border-blue-500/30">
               <div className="flex flex-col md:flex-row items-center justify-between gap-4">
                 <div className="text-center md:text-right">
-                  <p className="text-sm text-gray-300 mb-1 flex items-center gap-2 justify-center md:justify-start">
+                  <p className="text-sm text-gray-300 mb-2 flex items-center gap-2 justify-center md:justify-start">
                     <FaMobileAlt className="text-blue-400" />
                     رقم الهاتف السريع
                   </p>
-                  <div className="flex items-center gap-2 justify-center md:justify-start">
-                    <span className="text-2xl md:text-3xl font-bold text-white tracking-wider">+20</span>
-                    <span className="text-2xl md:text-3xl font-bold text-blue-400">106</span>
+                  <div className="flex items-center gap-2 justify-center md:justify-start" dir="ltr">
+                    <span className="text-2xl md:text-3xl font-bold text-blue-400">+20</span>
+                    <span className="text-2xl md:text-3xl font-bold text-white">106</span>
                     <span className="text-2xl md:text-3xl font-bold text-white">992</span>
                     <span className="text-2xl md:text-3xl font-bold text-white">7168</span>
                   </div>
-                  <p className="text-xs text-gray-400 mt-1">متاح 24 ساعة للاستشارات العاجلة</p>
+                  <p className="text-xs text-gray-400 mt-2">متاح 24 ساعة للاستشارات العاجلة</p>
                 </div>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
