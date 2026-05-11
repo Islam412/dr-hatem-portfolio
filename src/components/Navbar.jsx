@@ -35,7 +35,7 @@ const Navbar = () => {
             whileHover={{ scale: 1.05 }}
             className="text-2xl md:text-3xl font-bold cursor-pointer"
           >
-            <span className="animated-gradient-text">Dr. Hatem Abdel Kafy</span>
+            <span className="animated-gradient-text">{t('doctorName')}</span>
           </motion.h1>
           
           {/* Desktop Menu */}

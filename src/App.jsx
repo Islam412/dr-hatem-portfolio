@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -11,6 +12,19 @@ import { motion } from 'framer-motion';
 function App() {
   const { t, i18n } = useTranslation();
 
+  useEffect(() => {
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  }, []);
+
   return (
     <div dir={i18n.language === 'ar' ? 'rtl' : 'ltr'} className="bg-gradient-to-br from-gray-900 via-gray-900 to-black text-white min-h-screen">
       <Navbar />
@@ -20,22 +34,24 @@ function App() {
       <Gallery />
       <Contact />
       
-      <footer className="relative bg-black/50 backdrop-blur-md py-8 text-center border-t border-white/10">
+      {/* Footer with animated gradient */}
+      <footer className="relative bg-black/50 backdrop-blur-md py-8 text-center border-t border-white/10 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-600/10 via-purple-600/10 to-pink-600/10"></div>
         <div className="relative z-10">
           <div className="max-w-7xl mx-auto px-6">
             <p className="flex items-center justify-center gap-2 flex-wrap">
-              © 2025 Dr. Hatem Abdel Kafy - {t('footer.rights')}
+              © 2025 {t('doctorName')} - {t('footer.rights')}
               <span className="flex items-center gap-1">
                 {t('footer.designed')} <FaHeart className="text-red-500 inline animate-pulse" />
               </span>
             </p>
             <motion.button 
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.05, y: -5 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
               className="mt-4 text-gray-400 hover:text-white transition-colors inline-flex items-center gap-2 glass-card px-4 py-2 rounded-full"
             >
-              <FaRocket /> العودة للأعلى
+              <FaRocket /> {t('backToTop')}
             </motion.button>
           </div>
         </div>

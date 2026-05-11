@@ -5,6 +5,8 @@ i18n.use(initReactI18next).init({
   resources: {
     en: {
       translation: {
+        doctorName: 'Dr. Hatem Abdel Kafy',
+        backToTop: 'Back to Top',
         nav: { 
           home: 'Home', 
           diseases: 'Diseases', 
@@ -110,6 +112,8 @@ i18n.use(initReactI18next).init({
     },
     ar: {
       translation: {
+        doctorName: 'دكتور حاتم عبد الكافي',
+        backToTop: 'العودة للأعلى',
         nav: { 
           home: 'الرئيسية', 
           diseases: 'الأمراض', 
