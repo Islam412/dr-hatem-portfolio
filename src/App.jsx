@@ -51,9 +51,10 @@ function App() {
                   rel="noopener noreferrer"
                   className="text-blue-400 hover:text-purple-400 transition-colors duration-300 mx-1 hover:underline"
                 >
+                  <FaHeart className="text-red-500 inline animate-pulse" />
                   {t('designerName')}
                 </a>
-                <FaHeart className="text-red-500 inline animate-pulse" />
+                
               </span>
             </p>
             <motion.button 
