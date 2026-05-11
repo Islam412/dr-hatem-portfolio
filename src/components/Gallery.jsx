@@ -8,12 +8,12 @@ const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   
   const galleryImages = [
-    { id: 1, src: '/gallery1.jpg', title: t('gallery.image1') || 'محاضرة علمية', category: 'Conference' },
-    { id: 2, src: '/gallery2.jpg', title: t('gallery.image2') || 'مع مريض', category: 'Patient Care' },
-    { id: 3, src: '/gallery3.jpg', title: t('gallery.image3') || 'ورشة عمل', category: 'Workshop' },
-    { id: 4, src: '/gallery4.jpg', title: t('gallery.image4') || 'استلام شهادة', category: 'Award' },
-    { id: 5, src: '/gallery5.jpg', title: t('gallery.image5') || 'المستشفى السعودي الألماني', category: 'Hospital' },
-    { id: 6, src: '/gallery6.jpg', title: t('gallery.image6') || 'مؤتمر طبي', category: 'Conference' }
+    { id: 1, src: '/gallery1.jpg', title: t('محاضرة علمية') || 'محاضرة علمية', category: 'Scientific Lecture' },
+    { id: 2, src: '/gallery2.jpg', title: t('مع مريض') || 'مع مريض', category: 'Medical Consultation' },
+    { id: 3, src: '/gallery3.jpg', title: t('ورشة عمل') || 'ورشة عمل', category: 'Medical Workshop' },
+    { id: 4, src: '/gallery4.jpg', title: t('استلام شهادة') || 'استلام شهادة', category: 'Attaining a certificate' },
+    { id: 5, src: '/gallery5.jpg', title: t('المستشفى السعودي الألماني') || 'المستشفى السعودي الألماني', category: 'Saudi German Hospital - Cairo, Egypt' },
+    { id: 6, src: '/gallery6.jpg', title: t('مؤتمر طبي') || 'مؤتمر طبي', category: 'Scientific Medical Forum' }
   ];
 
   return (
