@@ -46,7 +46,7 @@ function App() {
               <span className="flex items-center gap-1">
                 {t('footer.designed')} 
                 <a 
-                  href="https://github.com/IslamHamdyy" 
+                  href="https://github.com/Islam412" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="text-blue-400 hover:text-purple-400 transition-colors duration-300 mx-1 hover:underline"
