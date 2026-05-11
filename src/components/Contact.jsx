@@ -34,7 +34,8 @@ const Contact = () => {
       rawValue: '+201069927168',
       href: 'tel:+201069927168', 
       color: 'from-blue-500 to-blue-600',
-      available: isArabic ? 'متاح 24 ساعة' : 'Available 24/7'
+      available: isArabic ? 'متاح 24 ساعة' : 'Available 24/7',
+      isExternal: false // يفتح تطبيق الهاتف
     },
     { 
       icon: <FaWhatsapp />, 
@@ -43,7 +44,8 @@ const Contact = () => {
       rawValue: '+201069927168',
       href: 'https://wa.me/201069927168', 
       color: 'from-green-500 to-green-600',
-      available: isArabic ? 'متاح 24 ساعة' : 'Available 24/7'
+      available: isArabic ? 'متاح 24 ساعة' : 'Available 24/7',
+      isExternal: true // يفتح في صفحة جديدة
     },
     { 
       icon: <FaEnvelope />, 
@@ -52,16 +54,18 @@ const Contact = () => {
       rawValue: 'info@drhatem.com',
       href: 'mailto:info@drhatem.com', 
       color: 'from-purple-500 to-purple-600',
-      available: null
+      available: null,
+      isExternal: false // يفتح تطبيق البريد
     },
     { 
       icon: <FaMapMarkerAlt />, 
       label: isArabic ? 'الموقع' : 'Location',
       value: isArabic ? 'المستشفى السعودي الألماني - مصر' : 'Saudi German Hospital - Egypt',
       rawValue: isArabic ? 'المستشفى السعودي الألماني - مصر' : 'Saudi German Hospital - Egypt',
-      href: '#', 
+      href: 'https://maps.google.com/?q=Saudi+German+Hospital+Cairo', 
       color: 'from-red-500 to-red-600',
-      available: null
+      available: null,
+      isExternal: true // يفتح خرائط جوجل في صفحة جديدة
     }
   ];
 
@@ -80,18 +84,6 @@ const Contact = () => {
     const message = `مرحباً دكتور حاتم، أنا ${formData.name}\nرقمي: ${formData.phone}\nالرسالة: ${formData.message || 'أرغب في حجز موعد'}`;
     const whatsappUrl = `https://wa.me/201069927168?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
-  };
-
-  // Format phone number function
-  const formatPhoneNumber = () => {
-    return (
-      <div className="flex items-center gap-1 flex-wrap" dir="ltr">
-        <span className="text-blue-400 text-xl font-bold">+20</span>
-        <span className="text-white text-xl font-bold">106</span>
-        <span className="text-white text-xl font-bold">992</span>
-        <span className="text-white text-xl font-bold">7168</span>
-      </div>
-    );
   };
 
   // Floating particles animation
@@ -205,6 +197,8 @@ const Contact = () => {
                   <motion.a
                     key={index}
                     href={info.href}
+                    target={info.isExternal ? "_blank" : "_self"}
+                    rel={info.isExternal ? "noopener noreferrer" : ""}
                     whileHover={{ scale: 1.02, x: 5 }}
                     className="flex items-center gap-4 p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-all group"
                   >
@@ -215,7 +209,6 @@ const Contact = () => {
                       <p className="text-sm text-gray-400 mb-1">{info.label}</p>
                       {(info.label === (isArabic ? 'الهاتف' : 'Phone') || info.label === (isArabic ? 'واتساب' : 'WhatsApp')) ? (
                         <div className="flex flex-col gap-1">
-                          {/* Phone number displayed correctly */}
                           <div className="flex items-center gap-1 flex-wrap" style={{ direction: 'ltr' }}>
                             <span className="text-blue-400 text-xl font-bold">+20</span>
                             <span className="text-white text-xl font-bold">106</span>
@@ -416,6 +409,7 @@ const Contact = () => {
                   whileHover={{ scale: 1.02 }}
                   href="https://maps.google.com/?q=Saudi+German+Hospital+Cairo"
                   target="_blank"
+                  rel="noopener noreferrer"
                   className="flex-1 py-2 rounded-xl bg-blue-600/20 text-blue-400 text-center text-sm font-semibold hover:bg-blue-600/30 transition"
                 >
                   {isArabic ? 'فتح في خرائط جوجل' : 'Open in Google Maps'}
@@ -424,6 +418,7 @@ const Contact = () => {
                   whileHover={{ scale: 1.02 }}
                   href="https://waze.com/ul?q=Saudi%20German%20Hospital%20Cairo"
                   target="_blank"
+                  rel="noopener noreferrer"
                   className="flex-1 py-2 rounded-xl bg-purple-600/20 text-purple-400 text-center text-sm font-semibold hover:bg-purple-600/30 transition"
                 >
                   {isArabic ? 'فتح في Waze' : 'Open in Waze'}
@@ -433,7 +428,7 @@ const Contact = () => {
           </motion.div>
         </div>
 
-        {/* Quick Call Button */}
+        {/* Quick Call Button - هذا يفتح تطبيق الهاتف */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
