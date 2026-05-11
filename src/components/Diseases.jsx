@@ -2,7 +2,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { 
   FaBone, FaLungs, FaBrain, FaShieldAlt, FaJoint, FaHeartbeat, 
-  FaStethoscope, FaSyringe, FaClipboardList, FaCheckCircle, 
+  FaStethoscope, FaClipboardList, FaCheckCircle, 
   FaTimes, FaArrowRight 
 } from 'react-icons/fa';
 import { useState } from 'react';
@@ -17,8 +17,13 @@ const Diseases = () => {
       icon: <FaBone />, 
       color: 'from-red-500 to-red-600', 
       glow: 'rgba(239,68,68,0.4)',
-      symptoms: [t('diseases.rheumatoid.symptom1') || 'آلام المفاصل', t('diseases.rheumatoid.symptom2') || 'تيبس الصباح', t('diseases.rheumatoid.symptom3') || 'تورم واحمرار'],
-      treatment: t('diseases.rheumatoid.treatment') || 'العلاج البيولوجي + الأدوية المضادة للروماتيزم',
+      symptoms: [
+        t('diseases.rheumatoidSymptom1'),
+        t('diseases.rheumatoidSymptom2'),
+        t('diseases.rheumatoidSymptom3'),
+        t('diseases.rheumatoidSymptom4')
+      ],
+      treatment: t('diseases.rheumatoidTreatment'),
       recoveryRate: 85
     },
     { 
@@ -26,8 +31,13 @@ const Diseases = () => {
       icon: <FaLungs />, 
       color: 'from-purple-500 to-purple-600', 
       glow: 'rgba(168,85,247,0.4)',
-      symptoms: [t('diseases.lupus.symptom1') || 'طفح جلدي', t('diseases.lupus.symptom2') || 'آلام المفاصل', t('diseases.lupus.symptom3') || 'التعب المزمن'],
-      treatment: t('diseases.lupus.treatment') || 'الكورتيكوستيرويدات + مثبطات المناعة',
+      symptoms: [
+        t('diseases.lupusSymptom1'),
+        t('diseases.lupusSymptom2'),
+        t('diseases.lupusSymptom3'),
+        t('diseases.lupusSymptom4')
+      ],
+      treatment: t('diseases.lupusTreatment'),
       recoveryRate: 75
     },
     { 
@@ -35,8 +45,13 @@ const Diseases = () => {
       icon: <FaBrain />, 
       color: 'from-blue-500 to-blue-600', 
       glow: 'rgba(59,130,246,0.4)',
-      symptoms: [t('diseases.fibro.symptom1') || 'ألم عضلي منتشر', t('diseases.fibro.symptom2') || 'اضطرابات النوم', t('diseases.fibro.symptom3') || 'الصداع'],
-      treatment: t('diseases.fibro.treatment') || 'العلاج السلوكي + الأدوية المسكنة',
+      symptoms: [
+        t('diseases.fibroSymptom1'),
+        t('diseases.fibroSymptom2'),
+        t('diseases.fibroSymptom3'),
+        t('diseases.fibroSymptom4')
+      ],
+      treatment: t('diseases.fibroTreatment'),
       recoveryRate: 70
     },
     { 
@@ -44,8 +59,13 @@ const Diseases = () => {
       icon: <FaShieldAlt />, 
       color: 'from-green-500 to-green-600', 
       glow: 'rgba(34,197,94,0.4)',
-      symptoms: [t('diseases.autoimmune.symptom1') || 'التهاب مزمن', t('diseases.autoimmune.symptom2') || 'فقدان الوزن', t('diseases.autoimmune.symptom3') || 'الحمى'],
-      treatment: t('diseases.autoimmune.treatment') || 'العلاج المناعي + الأدوية المثبطة',
+      symptoms: [
+        t('diseases.autoimmuneSymptom1'),
+        t('diseases.autoimmuneSymptom2'),
+        t('diseases.autoimmuneSymptom3'),
+        t('diseases.autoimmuneSymptom4')
+      ],
+      treatment: t('diseases.autoimmuneTreatment'),
       recoveryRate: 80
     },
     { 
@@ -53,8 +73,13 @@ const Diseases = () => {
       icon: <FaJoint />, 
       color: 'from-orange-500 to-orange-600', 
       glow: 'rgba(249,115,22,0.4)',
-      symptoms: [t('diseases.arthritis.symptom1') || 'تصلب المفاصل', t('diseases.arthritis.symptom2') || 'احمرار', t('diseases.arthritis.symptom3') || 'صعوبة الحركة'],
-      treatment: t('diseases.arthritis.treatment') || 'العلاج الطبيعي + مضادات الالتهاب',
+      symptoms: [
+        t('diseases.arthritisSymptom1'),
+        t('diseases.arthritisSymptom2'),
+        t('diseases.arthritisSymptom3'),
+        t('diseases.arthritisSymptom4')
+      ],
+      treatment: t('diseases.arthritisTreatment'),
       recoveryRate: 90
     }
   ];
@@ -179,7 +204,7 @@ const Diseases = () => {
                     <div className={`absolute inset-0 rounded-xl bg-gradient-to-r ${disease.color} blur-xl opacity-0 group-hover:opacity-60 transition-opacity duration-300`}></div>
                   </div>
                   
-                  <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-purple-400 transition-all">
+                  <h3 className="text-2xl font-bold text-white mb-3 transition-all">
                     {t(`diseases.${disease.key}.name`)}
                   </h3>
                   
@@ -245,7 +270,7 @@ const Diseases = () => {
           <div className="glass-card p-8 max-w-3xl mx-auto border border-blue-500/30 hover:border-purple-500/50 transition-all duration-300">
             <FaCheckCircle className="text-4xl text-green-400 mx-auto mb-4" />
             <p className="text-gray-300 text-lg leading-relaxed">
-              {t('diseases.moreInfo') || 'نحن نقدم أحدث الأساليب العلاجية والتقنيات المتقدمة في علاج أمراض الروماتيزم والمناعة'}
+              {t('diseases.moreInfo')}
             </p>
             <div className="flex gap-4 justify-center mt-6">
               <motion.a 
