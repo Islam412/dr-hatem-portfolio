@@ -15,7 +15,14 @@ i18n.use(initReactI18next).init({
         hero: { 
           title: 'Dr. Hatem Abdel Kafy', 
           subtitle: 'Consultant of Rheumatology & Immunology',
-          credentials: 'FRCP - Fellow of the Royal College of Physicians'
+          credentials: 'FRCP - Fellow of the Royal College of Physicians',
+          certified: 'Certified International Consultant',
+          consultant: 'Senior Consultant',
+          royal: 'Royal College Fellow',
+          hospital: 'Saudi German Hospital',
+          bookAppointment: 'Book Appointment Now',
+          yearsExp: '20+ Years Experience',
+          patients: '5000+ Patients'
         },
         diseases: { 
           title: 'Diseases We Treat',
@@ -39,7 +46,15 @@ i18n.use(initReactI18next).init({
           arthritis: {
             name: 'Inflammatory Arthritis',
             desc: 'Joint inflammation and stiffness causing pain and reduced mobility'
-          }
+          },
+          details: 'Details',
+          consultation: 'Consultation',
+          overview: 'Overview',
+          symptoms: 'Common Symptoms',
+          treatment: 'Treatment Plan',
+          recoveryRate: 'Recovery Rate',
+          bookConsult: 'Book Consultation with Dr. Hatem',
+          moreInfo: 'More Information'
         },
         procedures: {
           title: 'Medical Procedures',
@@ -51,7 +66,7 @@ i18n.use(initReactI18next).init({
         },
         gallery: {
           title: 'Photo Gallery',
-          subtitle: 'Moments from Dr. Hatem\'s professional journey'
+          subtitle: "Moments from Dr. Hatem's professional journey"
         },
         contact: { 
           title: 'Contact Dr. Hatem',
@@ -59,7 +74,33 @@ i18n.use(initReactI18next).init({
           phone: 'Phone',
           whatsapp: 'WhatsApp',
           location: 'Saudi German Hospital - Egypt',
-          email: 'Email'
+          email: 'Email',
+          contactInfo: 'Contact Information',
+          workingHours: 'Working Hours',
+          quickNumber: 'Quick Phone Number',
+          available247: 'Available 24/7',
+          satWed: 'Saturday - Wednesday',
+          thu: 'Thursday',
+          fri: 'Friday',
+          allWeek: 'All week',
+          endWeek: 'Weekend',
+          officialHoliday: 'Official Holiday',
+          emergencyOnly: 'Emergency only',
+          availableConsult: 'Available for consultations',
+          limitedAppointments: 'Limited appointments',
+          followSocial: 'Follow Dr. Hatem on Social Media',
+          bookNow: 'Book Your Appointment Now',
+          fullName: 'Full Name',
+          phoneNumber: 'Phone Number',
+          yourMessage: 'Your Message (Optional)',
+          sendViaWhatsApp: 'Send via WhatsApp',
+          hospitalLocation: 'Hospital Location',
+          openGoogleMaps: 'Open in Google Maps',
+          openWaze: 'Open in Waze',
+          copyNumber: 'Copy Number',
+          copied: 'Copied',
+          callNow: 'Call Now for Immediate Consultation',
+          emergencyConsult: 'Available 24/7 for emergency consultations'
         },
         footer: {
           rights: 'All rights reserved',
@@ -79,7 +120,14 @@ i18n.use(initReactI18next).init({
         hero: { 
           title: 'دكتور حاتم عبد الكافي', 
           subtitle: 'استشاري الروماتيزم والمناعة',
-          credentials: 'زميل الكلية الملكية البريطانية - استشاري أول'
+          credentials: 'زميل الكلية الملكية البريطانية - استشاري أول',
+          certified: 'استشاري عالمي معتمد',
+          consultant: 'استشاري أول',
+          royal: 'زميل الكلية الملكية',
+          hospital: 'المستشفى السعودي الألماني',
+          bookAppointment: 'احجز موعداً الآن',
+          yearsExp: '٢٠+ سنوات خبرة',
+          patients: '٥٠٠٠+ مريض'
         },
         diseases: { 
           title: 'الأمراض التي نعالجها',
@@ -103,7 +151,15 @@ i18n.use(initReactI18next).init({
           arthritis: {
             name: 'التهابات المفاصل',
             desc: 'التهاب وتيبس المفاصل مما يسبب ألماً وصعوبة في الحركة'
-          }
+          },
+          details: 'تفاصيل',
+          consultation: 'استشارة',
+          overview: 'نظرة عامة',
+          symptoms: 'الأعراض الشائعة',
+          treatment: 'خطة العلاج',
+          recoveryRate: 'نسبة التحسن',
+          bookConsult: 'احجز استشارة مع الدكتور حاتم',
+          moreInfo: 'معلومات أكثر'
         },
         procedures: {
           title: 'الإجراءات الطبية',
@@ -120,10 +176,36 @@ i18n.use(initReactI18next).init({
         contact: { 
           title: 'تواصل مع الدكتور حاتم',
           subtitle: 'احجز موعدك اليوم',
-          phone: 'هاتف',
+          phone: 'الهاتف',
           whatsapp: 'واتساب',
           location: 'المستشفى السعودي الألماني - مصر',
-          email: 'البريد الإلكتروني'
+          email: 'البريد الإلكتروني',
+          contactInfo: 'معلومات التواصل',
+          workingHours: 'ساعات العمل',
+          quickNumber: 'رقم الهاتف السريع',
+          available247: 'متاح ٢٤ ساعة',
+          satWed: 'السبت - الأربعاء',
+          thu: 'الخميس',
+          fri: 'الجمعة',
+          allWeek: 'طوال الأسبوع',
+          endWeek: 'عطلة نهاية الأسبوع',
+          officialHoliday: 'عطلة رسمية',
+          emergencyOnly: 'طوارئ فقط',
+          availableConsult: 'متاح للاستشارات',
+          limitedAppointments: 'مواعيد محدودة',
+          followSocial: 'تابع الدكتور على وسائل التواصل',
+          bookNow: 'احجز موعدك الآن',
+          fullName: 'الاسم الكامل',
+          phoneNumber: 'رقم الهاتف',
+          yourMessage: 'رسالتك (اختياري)',
+          sendViaWhatsApp: 'أرسل عبر واتساب',
+          hospitalLocation: 'موقع المستشفى',
+          openGoogleMaps: 'فتح في خرائط جوجل',
+          openWaze: 'فتح في Waze',
+          copyNumber: 'نسخ الرقم',
+          copied: 'تم النسخ',
+          callNow: 'اتصل الآن للاستشارة الفورية',
+          emergencyConsult: 'متاح ٢٤ ساعة للاستشارات العاجلة'
         },
         footer: {
           rights: 'جميع الحقوق محفوظة',

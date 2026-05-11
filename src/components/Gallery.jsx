@@ -8,12 +8,12 @@ const Gallery = () => {
   const [selectedImage, setSelectedImage] = useState(null);
   
   const galleryImages = [
-    { id: 1, src: '/gallery1.jpg', title: 'محاضرة علمية', category: 'Conference' },
-    { id: 2, src: '/gallery2.jpg', title: 'مع مريض', category: 'Patient Care' },
-    { id: 3, src: '/gallery3.jpg', title: 'ورشة عمل', category: 'Workshop' },
-    { id: 4, src: '/gallery4.jpg', title: 'استلام شهادة', category: 'Award' },
-    { id: 5, src: '/gallery5.jpg', title: 'المستشفى السعودي الألماني', category: 'Hospital' },
-    { id: 6, src: '/gallery6.jpg', title: 'مؤتمر طبي', category: 'Conference' }
+    { id: 1, src: '/gallery1.jpg', title: t('gallery.image1') || 'محاضرة علمية', category: 'Conference' },
+    { id: 2, src: '/gallery2.jpg', title: t('gallery.image2') || 'مع مريض', category: 'Patient Care' },
+    { id: 3, src: '/gallery3.jpg', title: t('gallery.image3') || 'ورشة عمل', category: 'Workshop' },
+    { id: 4, src: '/gallery4.jpg', title: t('gallery.image4') || 'استلام شهادة', category: 'Award' },
+    { id: 5, src: '/gallery5.jpg', title: t('gallery.image5') || 'المستشفى السعودي الألماني', category: 'Hospital' },
+    { id: 6, src: '/gallery6.jpg', title: t('gallery.image6') || 'مؤتمر طبي', category: 'Conference' }
   ];
 
   return (
@@ -47,6 +47,7 @@ const Gallery = () => {
                 src={image.src} 
                 alt={image.title}
                 className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+                onError={(e) => { e.target.src = 'https://via.placeholder.com/400x300?text=Image'; }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
@@ -79,6 +80,7 @@ const Gallery = () => {
               src={selectedImage.src} 
               alt={selectedImage.title}
               className="w-full h-auto rounded-lg"
+              onError={(e) => { e.target.src = 'https://via.placeholder.com/800x600?text=Image'; }}
             />
             <div className="text-white text-center mt-4">
               <h3 className="text-xl font-bold">{selectedImage.title}</h3>

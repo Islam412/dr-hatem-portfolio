@@ -6,10 +6,10 @@ const Procedures = () => {
   const { t } = useTranslation();
   
   const proceduresList = [
-    { key: 'joint_injection', icon: <FaSyringe />, desc: 'حقن دقيقة باستخدام الموجات فوق الصوتية' },
-    { key: 'muscle_biopsy', icon: <FaMicroscope />, desc: 'أخذ عينة لتشخيص دقيق' },
-    { key: 'lab_tests', icon: <FaFlask />, desc: 'تحاليل شاملة لأمراض المناعة' },
-    { key: 'immunotherapy', icon: <FaVial />, desc: 'علاج متقدم للمناعة الذاتية' }
+    { key: 'joint_injection', icon: <FaSyringe />, desc: t('procedures.joint_injection') },
+    { key: 'muscle_biopsy', icon: <FaMicroscope />, desc: t('procedures.muscle_biopsy') },
+    { key: 'lab_tests', icon: <FaFlask />, desc: t('procedures.lab_tests') },
+    { key: 'immunotherapy', icon: <FaVial />, desc: t('procedures.immunotherapy') }
   ];
 
   return (
@@ -47,7 +47,10 @@ const Procedures = () => {
                 {t(`procedures.${procedure.key}`)}
               </h3>
               <p className="text-gray-400 text-sm">
-                {procedure.desc}
+                {index === 0 && 'حقن دقيقة باستخدام الموجات فوق الصوتية'}
+                {index === 1 && 'أخذ عينة لتشخيص دقيق'}
+                {index === 2 && 'تحاليل شاملة لأمراض المناعة'}
+                {index === 3 && 'علاج متقدم للمناعة الذاتية'}
               </p>
             </motion.div>
           ))}

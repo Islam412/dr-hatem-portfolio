@@ -3,13 +3,12 @@ import { useTranslation } from 'react-i18next';
 import { 
   FaBone, FaLungs, FaBrain, FaShieldAlt, FaJoint, FaHeartbeat, 
   FaStethoscope, FaSyringe, FaClipboardList, FaCheckCircle, 
-  FaTimes, FaArrowLeft, FaArrowRight 
+  FaTimes, FaArrowRight 
 } from 'react-icons/fa';
 import { useState } from 'react';
 
 const Diseases = () => {
   const { t } = useTranslation();
-  const [flipped, setFlipped] = useState({});
   const [selectedDisease, setSelectedDisease] = useState(null);
 
   const diseasesList = [
@@ -18,56 +17,47 @@ const Diseases = () => {
       icon: <FaBone />, 
       color: 'from-red-500 to-red-600', 
       glow: 'rgba(239,68,68,0.4)',
-      symptoms: ['آلام المفاصل', 'تيبس الصباح', 'تورم واحمرار', 'ضعف عام'],
-      treatment: 'العلاج البيولوجي + الأدوية المضادة للروماتيزم',
-      recoveryRate: 85,
-      details: 'الروماتويد المفصلي هو مرض مناعي ذاتي مزمن يصيب المفاصل بشكل رئيسي، ويمكن أن يؤثر أيضاً على أجهزة أخرى في الجسم.'
+      symptoms: [t('diseases.rheumatoid.symptom1') || 'آلام المفاصل', t('diseases.rheumatoid.symptom2') || 'تيبس الصباح', t('diseases.rheumatoid.symptom3') || 'تورم واحمرار'],
+      treatment: t('diseases.rheumatoid.treatment') || 'العلاج البيولوجي + الأدوية المضادة للروماتيزم',
+      recoveryRate: 85
     },
     { 
       key: 'lupus', 
       icon: <FaLungs />, 
       color: 'from-purple-500 to-purple-600', 
       glow: 'rgba(168,85,247,0.4)',
-      symptoms: ['طفح جلدي', 'آلام المفاصل', 'التعب المزمن', 'تساقط الشعر'],
-      treatment: 'الكورتيكوستيرويدات + مثبطات المناعة',
-      recoveryRate: 75,
-      details: 'الذئبة الحمراء مرض مناعي ذاتي يمكن أن يصيب أي جزء من الجسم بما في ذلك المفاصل والجلد والكلى والدماغ.'
+      symptoms: [t('diseases.lupus.symptom1') || 'طفح جلدي', t('diseases.lupus.symptom2') || 'آلام المفاصل', t('diseases.lupus.symptom3') || 'التعب المزمن'],
+      treatment: t('diseases.lupus.treatment') || 'الكورتيكوستيرويدات + مثبطات المناعة',
+      recoveryRate: 75
     },
     { 
       key: 'fibro', 
       icon: <FaBrain />, 
       color: 'from-blue-500 to-blue-600', 
       glow: 'rgba(59,130,246,0.4)',
-      symptoms: ['ألم عضلي منتشر', 'اضطرابات النوم', 'الصداع', 'الذاكرة الضعيفة'],
-      treatment: 'العلاج السلوكي + الأدوية المسكنة',
-      recoveryRate: 70,
-      details: 'الفيبروميالجيا هو اضطراب يتميز بألم عضلي هيكلي منتشر يصاحبه تعر واضطرابات في النوم والمزاج.'
+      symptoms: [t('diseases.fibro.symptom1') || 'ألم عضلي منتشر', t('diseases.fibro.symptom2') || 'اضطرابات النوم', t('diseases.fibro.symptom3') || 'الصداع'],
+      treatment: t('diseases.fibro.treatment') || 'العلاج السلوكي + الأدوية المسكنة',
+      recoveryRate: 70
     },
     { 
       key: 'autoimmune', 
       icon: <FaShieldAlt />, 
       color: 'from-green-500 to-green-600', 
       glow: 'rgba(34,197,94,0.4)',
-      symptoms: ['التهاب مزمن', 'فقدان الوزن', 'الحمى', 'آلام العضلات'],
-      treatment: 'العلاج المناعي + الأدوية المثبطة',
-      recoveryRate: 80,
-      details: 'أمراض المناعة الذاتية تحدث عندما يهاجم الجهاز المناعي خلايا الجسم السليمة عن طريق الخطأ.'
+      symptoms: [t('diseases.autoimmune.symptom1') || 'التهاب مزمن', t('diseases.autoimmune.symptom2') || 'فقدان الوزن', t('diseases.autoimmune.symptom3') || 'الحمى'],
+      treatment: t('diseases.autoimmune.treatment') || 'العلاج المناعي + الأدوية المثبطة',
+      recoveryRate: 80
     },
     { 
       key: 'arthritis', 
       icon: <FaJoint />, 
       color: 'from-orange-500 to-orange-600', 
       glow: 'rgba(249,115,22,0.4)',
-      symptoms: ['تصلب المفاصل', 'احمرار', 'صعوبة الحركة', 'تورم'],
-      treatment: 'العلاج الطبيعي + مضادات الالتهاب',
-      recoveryRate: 90,
-      details: 'التهابات المفاصل تشمل مجموعة من الحالات التي تسبب التهاب وآلام في المفاصل.'
+      symptoms: [t('diseases.arthritis.symptom1') || 'تصلب المفاصل', t('diseases.arthritis.symptom2') || 'احمرار', t('diseases.arthritis.symptom3') || 'صعوبة الحركة'],
+      treatment: t('diseases.arthritis.treatment') || 'العلاج الطبيعي + مضادات الالتهاب',
+      recoveryRate: 90
     }
   ];
-
-  const toggleFlip = (index) => {
-    setFlipped(prev => ({ ...prev, [index]: !prev[index] }));
-  };
 
   const openModal = (disease) => {
     setSelectedDisease(disease);
@@ -81,11 +71,9 @@ const Diseases = () => {
 
   return (
     <section id="diseases" className="py-20 px-6 relative overflow-hidden min-h-screen">
-      {/* خلفية متحركة بتأثير ضوئي محسن */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-purple-900/10 to-blue-900/30"></div>
         
-        {/* دوائر ضوئية متحركة بسرعة مختلفة */}
         <motion.div
           animate={{
             scale: [1, 1.5, 1],
@@ -104,17 +92,7 @@ const Diseases = () => {
           transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
           className="absolute bottom-20 -right-48 w-96 h-96 rounded-full bg-purple-500/30 blur-3xl"
         />
-        <motion.div
-          animate={{
-            scale: [1, 1.3, 1],
-            x: [0, -100, 100, 0],
-            y: [0, 50, -50, 0]
-          }}
-          transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 w-64 h-64 rounded-full bg-pink-500/20 blur-3xl"
-        />
         
-        {/* جسيمات ضوئية أكثر */}
         {[...Array(35)].map((_, i) => (
           <motion.div
             key={i}
@@ -175,7 +153,7 @@ const Diseases = () => {
           <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mt-6 rounded-full"></div>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 perspective-1000">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {diseasesList.map((disease, index) => (
             <motion.div
               key={disease.key}
@@ -185,7 +163,6 @@ const Diseases = () => {
               whileHover={{ y: -10 }}
               className="relative cursor-pointer group"
             >
-              {/* Glow Effect على البطاقة */}
               <div 
                 className="absolute -inset-0.5 bg-gradient-to-r rounded-2xl blur-xl transition-all duration-500 opacity-0 group-hover:opacity-100"
                 style={{
@@ -195,7 +172,6 @@ const Diseases = () => {
               
               <div className="relative glass-card rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-2xl">
                 <div className="p-6">
-                  {/* أيقونة البطاقة */}
                   <div className="relative mb-5">
                     <div className={`w-20 h-20 rounded-xl bg-gradient-to-r ${disease.color} flex items-center justify-center text-white text-4xl shadow-lg group-hover:scale-110 transition-all duration-300 group-hover:rotate-6`}>
                       {disease.icon}
@@ -203,7 +179,6 @@ const Diseases = () => {
                     <div className={`absolute inset-0 rounded-xl bg-gradient-to-r ${disease.color} blur-xl opacity-0 group-hover:opacity-60 transition-opacity duration-300`}></div>
                   </div>
                   
-                  {/* العنوان والوصف */}
                   <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-400 group-hover:to-purple-400 transition-all">
                     {t(`diseases.${disease.key}.name`)}
                   </h3>
@@ -212,7 +187,6 @@ const Diseases = () => {
                     {t(`diseases.${disease.key}.desc`)}
                   </p>
                   
-                  {/* الأعراض */}
                   <div className="flex flex-wrap gap-2 mb-5">
                     {disease.symptoms.slice(0, 2).map((symptom, i) => (
                       <span key={i} className="text-xs px-3 py-1.5 rounded-full bg-white/5 text-blue-400 border border-blue-500/20">
@@ -226,7 +200,6 @@ const Diseases = () => {
                     )}
                   </div>
                   
-                  {/* الأزرار */}
                   <div className="flex gap-3 mt-4">
                     <motion.button
                       whileHover={{ scale: 1.05 }}
@@ -235,7 +208,7 @@ const Diseases = () => {
                       className="flex-1 px-4 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 text-white text-sm font-semibold hover:shadow-lg transition-all flex items-center justify-center gap-2"
                     >
                       <FaClipboardList />
-                      تفاصيل
+                      {t('diseases.details')}
                     </motion.button>
                     
                     <motion.button
@@ -245,12 +218,11 @@ const Diseases = () => {
                       className="flex-1 px-4 py-2.5 rounded-xl bg-white/10 text-white text-sm font-semibold hover:bg-white/20 transition-all flex items-center justify-center gap-2 border border-white/10"
                     >
                       <FaStethoscope />
-                      استشارة
+                      {t('diseases.consultation')}
                     </motion.button>
                   </div>
                 </div>
                 
-                {/* شريط التقدم */}
                 <div className="h-1 bg-white/5">
                   <motion.div
                     initial={{ width: 0 }}
@@ -264,7 +236,6 @@ const Diseases = () => {
           ))}
         </div>
         
-        {/* رسالة إضافية متحركة */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -274,7 +245,7 @@ const Diseases = () => {
           <div className="glass-card p-8 max-w-3xl mx-auto border border-blue-500/30 hover:border-purple-500/50 transition-all duration-300">
             <FaCheckCircle className="text-4xl text-green-400 mx-auto mb-4" />
             <p className="text-gray-300 text-lg leading-relaxed">
-              نحن نقدم أحدث الأساليب العلاجية والتقنيات المتقدمة في علاج أمراض الروماتيزم والمناعة
+              {t('diseases.moreInfo') || 'نحن نقدم أحدث الأساليب العلاجية والتقنيات المتقدمة في علاج أمراض الروماتيزم والمناعة'}
             </p>
             <div className="flex gap-4 justify-center mt-6">
               <motion.a 
@@ -282,7 +253,7 @@ const Diseases = () => {
                 whileHover={{ scale: 1.05 }}
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold hover:shadow-xl transition-all"
               >
-                احجز استشارتك الآن
+                {t('diseases.bookConsult')}
                 <FaArrowRight />
               </motion.a>
             </div>
@@ -290,7 +261,7 @@ const Diseases = () => {
         </motion.div>
       </div>
 
-      {/* مودال عرض التفاصيل الكاملة */}
+      {/* Modal */}
       <AnimatePresence>
         {selectedDisease && (
           <motion.div
@@ -326,12 +297,12 @@ const Diseases = () => {
               
               <div className="space-y-4">
                 <div>
-                  <p className="text-blue-400 font-semibold mb-2">📋 نظرة عامة</p>
-                  <p className="text-gray-300 leading-relaxed">{selectedDisease.details}</p>
+                  <p className="text-blue-400 font-semibold mb-2">{t('diseases.overview')} 📋</p>
+                  <p className="text-gray-300 leading-relaxed">{t(`diseases.${selectedDisease.key}.desc`)}</p>
                 </div>
                 
                 <div>
-                  <p className="text-purple-400 font-semibold mb-2">⚠️ الأعراض الشائعة</p>
+                  <p className="text-purple-400 font-semibold mb-2">{t('diseases.symptoms')} ⚠️</p>
                   <div className="flex flex-wrap gap-2">
                     {selectedDisease.symptoms.map((symptom, i) => (
                       <span key={i} className="px-3 py-1.5 rounded-full bg-white/10 text-gray-300 text-sm">
@@ -342,12 +313,12 @@ const Diseases = () => {
                 </div>
                 
                 <div>
-                  <p className="text-green-400 font-semibold mb-2">💊 خطة العلاج</p>
+                  <p className="text-green-400 font-semibold mb-2">{t('diseases.treatment')} 💊</p>
                   <p className="text-gray-300 leading-relaxed">{selectedDisease.treatment}</p>
                 </div>
                 
                 <div>
-                  <p className="text-yellow-400 font-semibold mb-2">📊 نسبة التحسن</p>
+                  <p className="text-yellow-400 font-semibold mb-2">{t('diseases.recoveryRate')} 📊</p>
                   <div className="relative pt-1">
                     <div className="overflow-hidden h-3 text-xs flex rounded-full bg-white/10">
                       <motion.div
@@ -357,7 +328,7 @@ const Diseases = () => {
                         className={`shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-gradient-to-r ${selectedDisease.color}`}
                       />
                     </div>
-                    <p className="text-right text-sm text-gray-400 mt-2">{selectedDisease.recoveryRate}% تحسن مع العلاج المناسب</p>
+                    <p className="text-right text-sm text-gray-400 mt-2">{selectedDisease.recoveryRate}% {t('diseases.recoveryRate')}</p>
                   </div>
                 </div>
               </div>
@@ -372,7 +343,7 @@ const Diseases = () => {
                 className="mt-6 w-full py-3 rounded-xl bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold hover:shadow-lg transition-all flex items-center justify-center gap-2"
               >
                 <FaStethoscope />
-                احجز استشارة مع الدكتور حاتم
+                {t('diseases.bookConsult')}
               </motion.button>
             </motion.div>
           </motion.div>

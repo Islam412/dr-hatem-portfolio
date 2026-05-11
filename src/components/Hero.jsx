@@ -1,11 +1,10 @@
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { FaStethoscope, FaAward, FaHospital, FaArrowRight, FaStar, FaMagic } from 'react-icons/fa';
+import { FaStethoscope, FaAward, FaHospital, FaArrowRight, FaStar } from 'react-icons/fa';
 
 const Hero = () => {
   const { t } = useTranslation();
 
-  // تأثير الجسيمات
   const particles = Array.from({ length: 30 }, (_, i) => ({
     id: i,
     size: Math.random() * 3 + 1,
@@ -16,11 +15,9 @@ const Hero = () => {
 
   return (
     <section id="home" className="min-h-screen pt-24 flex items-center relative overflow-hidden">
-      {/* خلفية متحركة بتأثير ضوئي */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-purple-900/20 to-blue-900/20"></div>
         
-        {/* جسيمات متحركة */}
         {particles.map((particle) => (
           <div
             key={particle.id}
@@ -36,7 +33,6 @@ const Hero = () => {
           />
         ))}
         
-        {/* دوائر ضوئية متحركة */}
         <motion.div
           animate={{
             scale: [1, 1.2, 1],
@@ -70,11 +66,11 @@ const Hero = () => {
               className="inline-flex items-center gap-2 glass-card px-4 py-2 rounded-full mb-6 border border-blue-500/50"
             >
               <FaStar className="text-yellow-500 animate-pulse" />
-              <span className="text-blue-400 font-semibold text-sm">استشاري عالمي معتمد</span>
+              <span className="text-blue-400 font-semibold text-sm">{t('hero.certified')}</span>
             </motion.div>
             
             <h1 className="text-5xl md:text-7xl font-bold mb-6">
-              <span className="animated-gradient-text">Dr. Hatem Abdel Kafy</span>
+              <span className="animated-gradient-text">{t('hero.title')}</span>
             </h1>
             
             <p className="text-2xl text-gray-300 mb-4 neon-text">{t('hero.subtitle')}</p>
@@ -89,19 +85,19 @@ const Hero = () => {
               <motion.div whileHover={{ scale: 1.05 }} className="glass-card px-6 py-3 rounded-full border border-blue-500/30 hover:border-blue-500 transition-all">
                 <div className="flex items-center gap-3">
                   <FaStethoscope className="text-3xl text-blue-400" />
-                  <span className="text-gray-200 font-semibold">استشاري أول</span>
+                  <span className="text-gray-200 font-semibold">{t('hero.consultant')}</span>
                 </div>
               </motion.div>
               <motion.div whileHover={{ scale: 1.05 }} className="glass-card px-6 py-3 rounded-full border border-purple-500/30 hover:border-purple-500 transition-all">
                 <div className="flex items-center gap-3">
                   <FaAward className="text-3xl text-purple-400" />
-                  <span className="text-gray-200 font-semibold">زميل الكلية الملكية</span>
+                  <span className="text-gray-200 font-semibold">{t('hero.royal')}</span>
                 </div>
               </motion.div>
               <motion.div whileHover={{ scale: 1.05 }} className="glass-card px-6 py-3 rounded-full border border-green-500/30 hover:border-green-500 transition-all">
                 <div className="flex items-center gap-3">
                   <FaHospital className="text-3xl text-green-400" />
-                  <span className="text-gray-200 font-semibold">المستشفى السعودي الألماني</span>
+                  <span className="text-gray-200 font-semibold">{t('hero.hospital')}</span>
                 </div>
               </motion.div>
             </motion.div>
@@ -112,7 +108,7 @@ const Hero = () => {
               whileTap={{ scale: 0.95 }}
               className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full font-semibold shadow-xl transition-all duration-300 group relative overflow-hidden"
             >
-              <span className="relative z-10">احجز موعداً الآن</span>
+              <span className="relative z-10">{t('hero.bookAppointment')}</span>
               <FaArrowRight className="group-hover:translate-x-1 transition-transform relative z-10" />
               <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity"></div>
             </motion.a>
@@ -136,20 +132,19 @@ const Hero = () => {
               />
             </div>
             
-            {/* بطاقات عائمة */}
             <motion.div 
               animate={{ y: [0, -20, 0] }}
               transition={{ duration: 3, repeat: Infinity }}
               className="absolute -top-6 -right-6 glass-card px-4 py-2 rounded-full border border-yellow-500/50"
             >
-              🌟 20+ سنوات خبرة
+              🌟 {t('hero.yearsExp')}
             </motion.div>
             <motion.div 
               animate={{ y: [0, 20, 0] }}
               transition={{ duration: 3.5, repeat: Infinity }}
               className="absolute -bottom-6 -left-6 glass-card px-4 py-2 rounded-full border border-green-500/50"
             >
-              🏥 5000+ مريض
+              🏥 {t('hero.patients')}
             </motion.div>
           </motion.div>
         </div>
