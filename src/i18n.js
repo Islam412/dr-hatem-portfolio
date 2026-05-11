@@ -6,6 +6,7 @@ i18n.use(initReactI18next).init({
     en: {
       translation: {
         doctorName: 'Dr. Hatem Abdel Kafy',
+        designerName: 'Eng / Islam Hamdy',
         backToTop: 'Back to Top',
         nav: { 
           home: 'Home', 
@@ -132,13 +133,14 @@ i18n.use(initReactI18next).init({
         },
         footer: {
           rights: 'All rights reserved',
-          designed: 'Designed with'
+          designed: 'Designed by'
         }
       }
     },
     ar: {
       translation: {
         doctorName: 'دكتور حاتم عبد الكافي',
+        designerName: 'مهندس / إسلام حمدى',
         backToTop: 'العودة للأعلى',
         nav: { 
           home: 'الرئيسية', 

@@ -40,9 +40,20 @@ function App() {
         <div className="relative z-10">
           <div className="max-w-7xl mx-auto px-6">
             <p className="flex items-center justify-center gap-2 flex-wrap">
-              © 2025 {t('doctorName')} - {t('footer.rights')}
+              {t('footer.rights')} - {t('doctorName')} © 2026
+            </p>
+            <p className="flex items-center justify-center gap-2 flex-wrap mt-2">
               <span className="flex items-center gap-1">
-                {t('footer.designed')} <FaHeart className="text-red-500 inline animate-pulse" />
+                {t('footer.designed')} 
+                <a 
+                  href="https://github.com/IslamHamdyy" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-blue-400 hover:text-purple-400 transition-colors duration-300 mx-1 hover:underline"
+                >
+                  {t('designerName')}
+                </a>
+                <FaHeart className="text-red-500 inline animate-pulse" />
               </span>
             </p>
             <motion.button 
