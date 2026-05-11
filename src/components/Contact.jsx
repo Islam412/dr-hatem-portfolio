@@ -9,7 +9,7 @@ import {
 import { useState } from 'react';
 
 const Contact = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [copied, setCopied] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
@@ -17,45 +17,51 @@ const Contact = () => {
     message: ''
   });
 
+  const isArabic = i18n.language === 'ar';
+
   const socialLinks = [
-    { icon: <FaFacebook />, url: 'https://www.facebook.com/share/18kkYqig5N/', name: 'فيسبوك', color: 'bg-blue-600', glow: 'shadow-blue-500/50' },
-    { icon: <FaInstagram />, url: 'https://www.instagram.com/dr.hatem.abdelkafy', name: 'إنستجرام', color: 'bg-pink-600', glow: 'shadow-pink-500/50' },
-    { icon: <FaTiktok />, url: 'https://www.tiktok.com/@hatemabdelkafy', name: 'تيك توك', color: 'bg-gray-800', glow: 'shadow-gray-500/50' },
-    { icon: <FaWhatsapp />, url: 'https://wa.me/201069927168', name: 'واتساب', color: 'bg-green-600', glow: 'shadow-green-500/50' }
+    { icon: <FaFacebook />, url: 'https://www.facebook.com/share/18kkYqig5N/', name: isArabic ? 'فيسبوك' : 'Facebook', color: 'bg-blue-600', glow: 'shadow-blue-500/50' },
+    { icon: <FaInstagram />, url: 'https://www.instagram.com/dr.hatem.abdelkafy', name: isArabic ? 'إنستجرام' : 'Instagram', color: 'bg-pink-600', glow: 'shadow-pink-500/50' },
+    { icon: <FaTiktok />, url: 'https://www.tiktok.com/@hatemabdelkafy', name: isArabic ? 'تيك توك' : 'TikTok', color: 'bg-gray-800', glow: 'shadow-gray-500/50' },
+    { icon: <FaWhatsapp />, url: 'https://wa.me/201069927168', name: isArabic ? 'واتساب' : 'WhatsApp', color: 'bg-green-600', glow: 'shadow-green-500/50' }
   ];
 
   const contactInfo = [
     { 
       icon: <FaPhoneAlt />, 
-      label: 'الهاتف', 
+      label: isArabic ? 'الهاتف' : 'Phone',
       value: '+20 106 992 7168', 
       rawValue: '+201069927168',
       href: 'tel:+201069927168', 
-      color: 'from-blue-500 to-blue-600' 
+      color: 'from-blue-500 to-blue-600',
+      available: isArabic ? 'متاح 24 ساعة' : 'Available 24/7'
     },
     { 
       icon: <FaWhatsapp />, 
-      label: 'واتساب', 
+      label: isArabic ? 'واتساب' : 'WhatsApp',
       value: '+20 106 992 7168', 
       rawValue: '+201069927168',
       href: 'https://wa.me/201069927168', 
-      color: 'from-green-500 to-green-600' 
+      color: 'from-green-500 to-green-600',
+      available: isArabic ? 'متاح 24 ساعة' : 'Available 24/7'
     },
     { 
       icon: <FaEnvelope />, 
-      label: 'البريد الإلكتروني', 
+      label: isArabic ? 'البريد الإلكتروني' : 'Email',
       value: 'info@drhatem.com', 
       rawValue: 'info@drhatem.com',
       href: 'mailto:info@drhatem.com', 
-      color: 'from-purple-500 to-purple-600' 
+      color: 'from-purple-500 to-purple-600',
+      available: null
     },
     { 
       icon: <FaMapMarkerAlt />, 
-      label: 'الموقع', 
-      value: 'المستشفى السعودي الألماني - مصر', 
-      rawValue: 'المستشفى السعودي الألماني - مصر',
+      label: isArabic ? 'الموقع' : 'Location',
+      value: isArabic ? 'المستشفى السعودي الألماني - مصر' : 'Saudi German Hospital - Egypt',
+      rawValue: isArabic ? 'المستشفى السعودي الألماني - مصر' : 'Saudi German Hospital - Egypt',
       href: '#', 
-      color: 'from-red-500 to-red-600' 
+      color: 'from-red-500 to-red-600',
+      available: null
     }
   ];
 
@@ -74,6 +80,18 @@ const Contact = () => {
     const message = `مرحباً دكتور حاتم، أنا ${formData.name}\nرقمي: ${formData.phone}\nالرسالة: ${formData.message || 'أرغب في حجز موعد'}`;
     const whatsappUrl = `https://wa.me/201069927168?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');
+  };
+
+  // Format phone number function
+  const formatPhoneNumber = () => {
+    return (
+      <div className="flex items-center gap-1 flex-wrap" dir="ltr">
+        <span className="text-blue-400 text-xl font-bold">+20</span>
+        <span className="text-white text-xl font-bold">106</span>
+        <span className="text-white text-xl font-bold">992</span>
+        <span className="text-white text-xl font-bold">7168</span>
+      </div>
+    );
   };
 
   // Floating particles animation
@@ -158,10 +176,12 @@ const Contact = () => {
             </div>
           </motion.div>
           <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            <span className="animated-gradient-text">تواصل مع الدكتور حاتم</span>
+            <span className="animated-gradient-text">{isArabic ? 'تواصل مع الدكتور حاتم' : 'Contact Dr. Hatem'}</span>
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            احجز موعدك اليوم واستشر أفضل استشاري في أمراض الروماتيزم والمناعة
+            {isArabic 
+              ? 'احجز موعدك اليوم واستشر أفضل استشاري في أمراض الروماتيزم والمناعة'
+              : 'Book your appointment today and consult the best consultant in rheumatology and immunology'}
           </p>
           <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mt-6 rounded-full"></div>
         </motion.div>
@@ -174,11 +194,11 @@ const Contact = () => {
             transition={{ duration: 0.6 }}
             className="space-y-4"
           >
-            {/* Contact Cards - Number under label */}
+            {/* Contact Cards */}
             <div className="glass-card p-6 rounded-2xl">
               <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
                 <FaUserMd className="text-blue-400" />
-                معلومات التواصل
+                {isArabic ? 'معلومات التواصل' : 'Contact Information'}
               </h3>
               <div className="space-y-4">
                 {contactInfo.map((info, index) => (
@@ -186,22 +206,25 @@ const Contact = () => {
                     key={index}
                     href={info.href}
                     whileHover={{ scale: 1.02, x: 5 }}
-                    className="flex items-start gap-4 p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-all group"
+                    className="flex items-center gap-4 p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-all group"
                   >
                     <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${info.color} flex items-center justify-center text-white text-xl shrink-0`}>
                       {info.icon}
                     </div>
                     <div className="flex-1">
                       <p className="text-sm text-gray-400 mb-1">{info.label}</p>
-                      {(info.label === 'الهاتف' || info.label === 'واتساب') ? (
+                      {(info.label === (isArabic ? 'الهاتف' : 'Phone') || info.label === (isArabic ? 'واتساب' : 'WhatsApp')) ? (
                         <div className="flex flex-col gap-1">
-                          <div className="flex items-center gap-1 flex-wrap" dir="ltr">
+                          {/* Phone number displayed correctly */}
+                          <div className="flex items-center gap-1 flex-wrap" style={{ direction: 'ltr' }}>
                             <span className="text-blue-400 text-xl font-bold">+20</span>
                             <span className="text-white text-xl font-bold">106</span>
                             <span className="text-white text-xl font-bold">992</span>
                             <span className="text-white text-xl font-bold">7168</span>
                           </div>
-                          <p className="text-xs text-gray-500">متاح 24 ساعة</p>
+                          {info.available && (
+                            <p className="text-xs text-green-400" style={{ direction: 'rtl' }}>{info.available}</p>
+                          )}
                         </div>
                       ) : (
                         <p className="text-white text-lg font-bold">
@@ -221,57 +244,56 @@ const Contact = () => {
             <div className="glass-card p-6 rounded-2xl">
               <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
                 <FaClock className="text-green-400" />
-                ساعات العمل
+                {isArabic ? 'ساعات العمل' : 'Working Hours'}
               </h3>
               <div className="space-y-3">
                 <div className="flex justify-between items-center p-3 rounded-xl bg-white/5 hover:bg-white/10 transition">
                   <div>
-                    <p className="text-gray-300 font-semibold">السبت - الأربعاء</p>
-                    <p className="text-xs text-gray-500">طوال الأسبوع</p>
+                    <p className="text-gray-300 font-semibold">{isArabic ? 'السبت - الأربعاء' : 'Saturday - Wednesday'}</p>
                   </div>
-                  <div className="text-left" dir="ltr">
-                    <p className="text-white font-bold text-lg">10:00 ص - 8:00 م</p>
-                    <p className="text-xs text-green-400">متاح للاستشارات</p>
-                  </div>
-                </div>
-                <div className="flex justify-between items-center p-3 rounded-xl bg-white/5 hover:bg-white/10 transition">
-                  <div>
-                    <p className="text-gray-300 font-semibold">الخميس</p>
-                    <p className="text-xs text-gray-500">آخر الأسبوع</p>
-                  </div>
-                  <div className="text-left" dir="ltr">
-                    <p className="text-white font-bold text-lg">10:00 ص - 4:00 م</p>
-                    <p className="text-xs text-yellow-400">مواعيد محدودة</p>
+                  <div className="text-left">
+                    <p className="text-white font-bold text-lg" style={{ direction: 'ltr' }}>10:00 AM - 8:00 PM</p>
+                    <p className="text-xs text-green-400">{isArabic ? 'متاح للاستشارات' : 'Available for consultations'}</p>
                   </div>
                 </div>
                 <div className="flex justify-between items-center p-3 rounded-xl bg-white/5 hover:bg-white/10 transition">
                   <div>
-                    <p className="text-gray-300 font-semibold">الجمعة</p>
-                    <p className="text-xs text-gray-500">عطلة نهاية الأسبوع</p>
+                    <p className="text-gray-300 font-semibold">{isArabic ? 'الخميس' : 'Thursday'}</p>
+                  </div>
+                  <div className="text-left">
+                    <p className="text-white font-bold text-lg" style={{ direction: 'ltr' }}>10:00 AM - 4:00 PM</p>
+                    <p className="text-xs text-yellow-400">{isArabic ? 'مواعيد محدودة' : 'Limited appointments'}</p>
+                  </div>
+                </div>
+                <div className="flex justify-between items-center p-3 rounded-xl bg-white/5 hover:bg-white/10 transition">
+                  <div>
+                    <p className="text-gray-300 font-semibold">{isArabic ? 'الجمعة' : 'Friday'}</p>
                   </div>
                   <div>
-                    <p className="text-green-400 font-bold text-lg">عطلة رسمية</p>
-                    <p className="text-xs text-gray-500">طوارئ فقط</p>
+                    <p className="text-green-400 font-bold text-lg">{isArabic ? 'عطلة رسمية' : 'Official Holiday'}</p>
+                    <p className="text-xs text-gray-500">{isArabic ? 'طوارئ فقط' : 'Emergency only'}</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Quick Copy - Proper Number Display */}
+            {/* Quick Copy */}
             <div className="glass-card p-6 rounded-2xl bg-gradient-to-r from-blue-600/20 to-purple-600/20 border border-blue-500/30">
               <div className="flex flex-col md:flex-row items-center justify-between gap-4">
                 <div className="text-center md:text-right">
                   <p className="text-sm text-gray-300 mb-2 flex items-center gap-2 justify-center md:justify-start">
                     <FaMobileAlt className="text-blue-400" />
-                    رقم الهاتف السريع
+                    {isArabic ? 'رقم الهاتف السريع' : 'Quick Phone Number'}
                   </p>
-                  <div className="flex items-center gap-2 justify-center md:justify-start" dir="ltr">
+                  <div className="flex items-center gap-2 justify-center md:justify-start" style={{ direction: 'ltr' }}>
                     <span className="text-2xl md:text-3xl font-bold text-blue-400">+20</span>
                     <span className="text-2xl md:text-3xl font-bold text-white">106</span>
                     <span className="text-2xl md:text-3xl font-bold text-white">992</span>
                     <span className="text-2xl md:text-3xl font-bold text-white">7168</span>
                   </div>
-                  <p className="text-xs text-gray-400 mt-2">متاح 24 ساعة للاستشارات العاجلة</p>
+                  <p className="text-xs text-gray-400 mt-2" style={{ direction: 'rtl' }}>
+                    {isArabic ? 'متاح 24 ساعة للاستشارات العاجلة' : 'Available 24/7 for emergency consultations'}
+                  </p>
                 </div>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
@@ -282,12 +304,12 @@ const Contact = () => {
                   {copied ? (
                     <>
                       <FaCheck className="text-green-400 text-lg" />
-                      <span className="text-green-400 font-semibold">تم النسخ</span>
+                      <span className="text-green-400 font-semibold">{isArabic ? 'تم النسخ' : 'Copied'}</span>
                     </>
                   ) : (
                     <>
                       <FaCopy className="text-blue-400 text-lg" />
-                      <span className="text-white font-semibold">نسخ الرقم</span>
+                      <span className="text-white font-semibold">{isArabic ? 'نسخ الرقم' : 'Copy Number'}</span>
                     </>
                   )}
                 </motion.button>
@@ -306,7 +328,7 @@ const Contact = () => {
             <div className="glass-card p-6 rounded-2xl">
               <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
                 <FaStar className="text-yellow-400" />
-                تابع الدكتور على وسائل التواصل
+                {isArabic ? 'تابع الدكتور على وسائل التواصل' : 'Follow Dr. Hatem on Social Media'}
               </h3>
               <div className="grid grid-cols-2 gap-3">
                 {socialLinks.map((social, index) => (
@@ -330,13 +352,13 @@ const Contact = () => {
             <div className="glass-card p-6 rounded-2xl">
               <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
                 <FaCalendarCheck className="text-blue-400" />
-                احجز موعدك الآن
+                {isArabic ? 'احجز موعدك الآن' : 'Book Your Appointment Now'}
               </h3>
               <form onSubmit={handleSubmit} className="space-y-3">
                 <input
                   type="text"
                   name="name"
-                  placeholder="الاسم الكامل"
+                  placeholder={isArabic ? 'الاسم الكامل' : 'Full Name'}
                   value={formData.name}
                   onChange={handleChange}
                   required
@@ -345,16 +367,16 @@ const Contact = () => {
                 <input
                   type="tel"
                   name="phone"
-                  placeholder="رقم الهاتف"
+                  placeholder={isArabic ? 'رقم الهاتف' : 'Phone Number'}
                   value={formData.phone}
                   onChange={handleChange}
                   required
                   className="w-full p-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition"
-                  dir="ltr"
+                  style={{ direction: 'ltr' }}
                 />
                 <textarea
                   name="message"
-                  placeholder="رسالتك (اختياري)"
+                  placeholder={isArabic ? 'رسالتك (اختياري)' : 'Your Message (Optional)'}
                   value={formData.message}
                   onChange={handleChange}
                   rows="3"
@@ -367,7 +389,7 @@ const Contact = () => {
                   className="w-full py-3 rounded-xl bg-gradient-to-r from-green-600 to-green-700 text-white font-semibold hover:shadow-lg transition-all flex items-center justify-center gap-2"
                 >
                   <FaWhatsapp className="text-xl" />
-                  أرسل عبر واتساب
+                  {isArabic ? 'أرسل عبر واتساب' : 'Send via WhatsApp'}
                 </motion.button>
               </form>
             </div>
@@ -376,7 +398,7 @@ const Contact = () => {
             <div className="glass-card p-6 rounded-2xl">
               <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
                 <FaMapMarkerAlt className="text-purple-400" />
-                موقع المستشفى
+                {isArabic ? 'موقع المستشفى' : 'Hospital Location'}
               </h3>
               <div className="rounded-xl overflow-hidden h-48 mb-3">
                 <iframe
@@ -396,7 +418,7 @@ const Contact = () => {
                   target="_blank"
                   className="flex-1 py-2 rounded-xl bg-blue-600/20 text-blue-400 text-center text-sm font-semibold hover:bg-blue-600/30 transition"
                 >
-                  فتح في خرائط جوجل
+                  {isArabic ? 'فتح في خرائط جوجل' : 'Open in Google Maps'}
                 </motion.a>
                 <motion.a
                   whileHover={{ scale: 1.02 }}
@@ -404,7 +426,7 @@ const Contact = () => {
                   target="_blank"
                   className="flex-1 py-2 rounded-xl bg-purple-600/20 text-purple-400 text-center text-sm font-semibold hover:bg-purple-600/30 transition"
                 >
-                  فتح في Waze
+                  {isArabic ? 'فتح في Waze' : 'Open in Waze'}
                 </motion.a>
               </div>
             </div>
@@ -425,7 +447,7 @@ const Contact = () => {
             className="inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-gradient-to-r from-green-600 to-green-700 text-white font-bold text-lg hover:shadow-xl transition-all"
           >
             <FaPhoneVolume className="text-xl animate-pulse" />
-            اتصل الآن للاستشارة الفورية
+            {isArabic ? 'اتصل الآن للاستشارة الفورية' : 'Call Now for Immediate Consultation'}
             <FaArrowRight />
           </motion.a>
         </motion.div>
