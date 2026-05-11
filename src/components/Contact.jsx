@@ -1,105 +1,307 @@
 import { motion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import { FaFacebook, FaInstagram, FaTiktok, FaWhatsapp, FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaClock } from 'react-icons/fa';
+import { 
+  FaFacebook, FaInstagram, FaTiktok, FaWhatsapp, 
+  FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaClock,
+  FaCopy, FaCheck, FaStar, FaHeartbeat, FaArrowRight,
+  FaPhoneVolume, FaCalendarCheck, FaUserMd
+} from 'react-icons/fa';
+import { useState } from 'react';
 
 const Contact = () => {
   const { t } = useTranslation();
-  
+  const [copied, setCopied] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    phone: '',
+    message: ''
+  });
+
   const socialLinks = [
-    { icon: <FaFacebook />, url: 'https://www.facebook.com/share/18kkYqig5N/', color: 'bg-blue-600', hover: 'hover:bg-blue-700' },
-    { icon: <FaInstagram />, url: 'https://www.instagram.com/dr.hatem.abdelkafy', color: 'bg-pink-600', hover: 'hover:bg-pink-700' },
-    { icon: <FaTiktok />, url: 'https://www.tiktok.com/@hatemabdelkafy', color: 'bg-black', hover: 'hover:bg-gray-800' },
-    { icon: <FaWhatsapp />, url: 'https://wa.me/201069927168', color: 'bg-green-600', hover: 'hover:bg-green-700' }
+    { icon: <FaFacebook />, url: 'https://www.facebook.com/share/18kkYqig5N/', name: 'Facebook', color: 'bg-blue-600', glow: 'shadow-blue-500/50' },
+    { icon: <FaInstagram />, url: 'https://www.instagram.com/dr.hatem.abdelkafy', name: 'Instagram', color: 'bg-pink-600', glow: 'shadow-pink-500/50' },
+    { icon: <FaTiktok />, url: 'https://www.tiktok.com/@hatemabdelkafy', name: 'TikTok', color: 'bg-gray-800', glow: 'shadow-gray-500/50' },
+    { icon: <FaWhatsapp />, url: 'https://wa.me/201069927168', name: 'WhatsApp', color: 'bg-green-600', glow: 'shadow-green-500/50' }
   ];
 
   const contactInfo = [
-    { icon: <FaPhoneAlt />, label: t('contact.phone'), value: '+20 106 992 7168', href: 'tel:+201069927168' },
-    { icon: <FaWhatsapp />, label: t('contact.whatsapp'), value: '+20 106 992 7168', href: 'https://wa.me/201069927168' },
-    { icon: <FaEnvelope />, label: t('contact.email'), value: 'info@drhatem.com', href: 'mailto:info@drhatem.com' },
-    { icon: <FaMapMarkerAlt />, label: t('contact.location'), value: 'Saudi German Hospital - Egypt', href: '#' }
+    { icon: <FaPhoneAlt />, label: 'الهاتف', value: '+20 106 992 7168', href: 'tel:+201069927168', color: 'from-blue-500 to-blue-600' },
+    { icon: <FaWhatsapp />, label: 'واتساب', value: '+20 106 992 7168', href: 'https://wa.me/201069927168', color: 'from-green-500 to-green-600' },
+    { icon: <FaEnvelope />, label: 'البريد الإلكتروني', value: 'info@drhatem.com', href: 'mailto:info@drhatem.com', color: 'from-purple-500 to-purple-600' },
+    { icon: <FaMapMarkerAlt />, label: 'الموقع', value: 'المستشفى السعودي الألماني - مصر', href: '#', color: 'from-red-500 to-red-600' }
   ];
 
+  const copyPhone = () => {
+    navigator.clipboard.writeText('+201069927168');
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const message = `مرحباً دكتور حاتم، أنا ${formData.name}\nرقمي: ${formData.phone}\nالرسالة: ${formData.message || 'أرغب في حجز موعد'}`;
+    const whatsappUrl = `https://wa.me/201069927168?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
+  // Floating particles animation
+  const particles = Array.from({ length: 30 }, (_, i) => ({
+    id: i,
+    size: Math.random() * 3 + 1,
+    left: Math.random() * 100,
+    delay: Math.random() * 10,
+    duration: Math.random() * 10 + 10
+  }));
+
   return (
-    <section id="contact" className="py-20 px-6 bg-gradient-to-br from-blue-50 to-indigo-100">
-      <div className="max-w-7xl mx-auto">
+    <section id="contact" className="py-20 px-6 relative overflow-hidden">
+      {/* خلفية متحركة */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-purple-900/10 to-blue-900/20"></div>
+        
+        {/* دوائر ضوئية متحركة */}
+        <motion.div
+          animate={{
+            scale: [1, 1.3, 1],
+            x: [0, 100, -100, 0],
+            opacity: [0.1, 0.2, 0.1]
+          }}
+          transition={{ duration: 20, repeat: Infinity }}
+          className="absolute top-20 -left-48 w-96 h-96 rounded-full bg-blue-500/20 blur-3xl"
+        />
+        <motion.div
+          animate={{
+            scale: [1, 1.4, 1],
+            y: [0, -80, 0],
+            opacity: [0.05, 0.15, 0.05]
+          }}
+          transition={{ duration: 18, repeat: Infinity }}
+          className="absolute bottom-20 -right-48 w-96 h-96 rounded-full bg-purple-500/20 blur-3xl"
+        />
+        
+        {/* جسيمات متحركة */}
+        {particles.map((particle) => (
+          <motion.div
+            key={particle.id}
+            className="absolute rounded-full bg-blue-400/30"
+            style={{
+              width: `${particle.size}px`,
+              height: `${particle.size}px`,
+              left: `${particle.left}%`,
+              top: `${Math.random() * 100}%`,
+            }}
+            animate={{
+              y: [0, -40, 0],
+              opacity: [0, 0.5, 0]
+            }}
+            transition={{
+              duration: particle.duration,
+              repeat: Infinity,
+              delay: particle.delay,
+              ease: "easeInOut"
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
+        {/* Header Section */}
         <motion.div
           initial={{ opacity: 0, y: -30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-            {t('contact.title')}
+          <motion.div
+            animate={{ 
+              scale: [1, 1.1, 1],
+              rotate: [0, 360]
+            }}
+            transition={{ 
+              scale: { duration: 2, repeat: Infinity },
+              rotate: { duration: 20, repeat: Infinity, ease: "linear" }
+            }}
+            className="inline-block mb-4"
+          >
+            <div className="w-20 h-20 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 flex items-center justify-center shadow-lg shadow-blue-500/50">
+              <FaHeartbeat className="text-3xl text-white" />
+            </div>
+          </motion.div>
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            <span className="animated-gradient-text">تواصل مع الدكتور حاتم</span>
           </h2>
-          <p className="text-gray-600 text-lg">{t('contact.subtitle')}</p>
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+            احجز موعدك اليوم واستشر أفضل استشاري في أمراض الروماتيزم والمناعة
+          </p>
+          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto mt-6 rounded-full"></div>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Contact Info */}
+        <div className="grid lg:grid-cols-2 gap-8">
+          {/* Left Column - Contact Info */}
           <motion.div
             initial={{ x: -50, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.6 }}
-            className="space-y-6"
+            className="space-y-4"
           >
-            {contactInfo.map((info, index) => (
-              <a
-                key={index}
-                href={info.href}
-                className="flex items-center gap-4 p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 group"
-              >
-                <div className="text-3xl text-blue-600 group-hover:scale-110 transition-transform">
-                  {info.icon}
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500">{info.label}</p>
-                  <p className="text-lg font-semibold text-gray-800">{info.value}</p>
-                </div>
-              </a>
-            ))}
-            
-            <div className="flex items-center gap-4 p-4 bg-white rounded-xl shadow-md">
-              <div className="text-3xl text-blue-600">
-                <FaClock />
+            {/* Contact Cards */}
+            <div className="glass-card p-6 rounded-2xl">
+              <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                <FaUserMd className="text-blue-400" />
+                معلومات التواصل
+              </h3>
+              <div className="space-y-3">
+                {contactInfo.map((info, index) => (
+                  <motion.a
+                    key={index}
+                    href={info.href}
+                    whileHover={{ scale: 1.02, x: 5 }}
+                    className="flex items-center gap-4 p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-all group"
+                  >
+                    <div className={`w-10 h-10 rounded-lg bg-gradient-to-r ${info.color} flex items-center justify-center text-white text-lg`}>
+                      {info.icon}
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-xs text-gray-400">{info.label}</p>
+                      <p className="text-sm text-white font-semibold">{info.value}</p>
+                    </div>
+                    <FaArrowRight className="text-gray-400 group-hover:text-white transition-colors" />
+                  </motion.a>
+                ))}
               </div>
-              <div>
-                <p className="text-sm text-gray-500">ساعات العمل</p>
-                <p className="text-lg font-semibold text-gray-800">{t('contact.working_hours')}</p>
+            </div>
+
+            {/* Working Hours */}
+            <div className="glass-card p-6 rounded-2xl">
+              <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                <FaClock className="text-green-400" />
+                ساعات العمل
+              </h3>
+              <div className="space-y-3">
+                <div className="flex justify-between items-center p-3 rounded-xl bg-white/5">
+                  <span className="text-gray-300">السبت - الأربعاء</span>
+                  <span className="text-white font-semibold">10:00 ص - 8:00 م</span>
+                </div>
+                <div className="flex justify-between items-center p-3 rounded-xl bg-white/5">
+                  <span className="text-gray-300">الخميس</span>
+                  <span className="text-white font-semibold">10:00 ص - 4:00 م</span>
+                </div>
+                <div className="flex justify-between items-center p-3 rounded-xl bg-white/5">
+                  <span className="text-gray-300">الجمعة</span>
+                  <span className="text-green-400 font-semibold">عطلة</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Quick Copy */}
+            <div className="glass-card p-6 rounded-2xl bg-gradient-to-r from-blue-600/20 to-purple-600/20">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm text-gray-300">رقم الهاتف السريع</p>
+                  <p className="text-2xl font-bold text-white">+20 106 992 7168</p>
+                </div>
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={copyPhone}
+                  className="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 transition-all flex items-center gap-2"
+                >
+                  {copied ? <FaCheck className="text-green-400" /> : <FaCopy className="text-blue-400" />}
+                  <span className="text-sm">{copied ? 'تم النسخ' : 'نسخ'}</span>
+                </motion.button>
               </div>
             </div>
           </motion.div>
 
-          {/* Social Media & Map */}
+          {/* Right Column - Social & Form */}
           <motion.div
             initial={{ x: 50, opacity: 0 }}
             whileInView={{ x: 0, opacity: 1 }}
             transition={{ duration: 0.6 }}
-            className="space-y-6"
+            className="space-y-4"
           >
-            <div className="bg-white rounded-xl shadow-md p-6">
-              <h3 className="text-xl font-bold text-gray-800 mb-4 text-center">تابع الدكتور على وسائل التواصل</h3>
-              <div className="flex justify-center gap-4">
+            {/* Social Media */}
+            <div className="glass-card p-6 rounded-2xl">
+              <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                <FaStar className="text-yellow-400" />
+                تابع الدكتور على وسائل التواصل
+              </h3>
+              <div className="grid grid-cols-2 gap-3">
                 {socialLinks.map((social, index) => (
                   <motion.a
                     key={index}
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    whileHover={{ scale: 1.1, y: -5 }}
+                    whileHover={{ scale: 1.05, y: -5 }}
                     whileTap={{ scale: 0.95 }}
-                    className={`${social.color} ${social.hover} text-white p-4 rounded-full text-2xl transition-all duration-300 shadow-lg`}
+                    className={`${social.color} text-white p-3 rounded-xl flex items-center justify-center gap-2 hover:shadow-xl transition-all ${social.glow} hover:shadow-lg`}
                   >
-                    {social.icon}
+                    <span className="text-xl">{social.icon}</span>
+                    <span className="text-sm font-semibold">{social.name}</span>
                   </motion.a>
                 ))}
               </div>
             </div>
 
-            <div className="bg-white rounded-xl shadow-md p-6">
-              <h3 className="text-xl font-bold text-gray-800 mb-4">موقع المستشفى</h3>
-              <div className="rounded-lg overflow-hidden h-64 bg-gray-200 flex items-center justify-center">
+            {/* Appointment Form */}
+            <div className="glass-card p-6 rounded-2xl">
+              <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                <FaCalendarCheck className="text-blue-400" />
+                احجز موعدك الآن
+              </h3>
+              <form onSubmit={handleSubmit} className="space-y-3">
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="الاسم الكامل"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  className="w-full p-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition"
+                />
+                <input
+                  type="tel"
+                  name="phone"
+                  placeholder="رقم الهاتف"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  required
+                  className="w-full p-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition"
+                />
+                <textarea
+                  name="message"
+                  placeholder="رسالتك (اختياري)"
+                  value={formData.message}
+                  onChange={handleChange}
+                  rows="3"
+                  className="w-full p-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition resize-none"
+                />
+                <motion.button
+                  type="submit"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full py-3 rounded-xl bg-gradient-to-r from-green-600 to-green-700 text-white font-semibold hover:shadow-lg transition-all flex items-center justify-center gap-2"
+                >
+                  <FaWhatsapp className="text-xl" />
+                  أرسل عبر واتساب
+                </motion.button>
+              </form>
+            </div>
+
+            {/* Map */}
+            <div className="glass-card p-6 rounded-2xl">
+              <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                <FaMapMarkerAlt className="text-purple-400" />
+                موقع المستشفى
+              </h3>
+              <div className="rounded-xl overflow-hidden h-48 mb-3">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1x3453.5!2d31.235!3d30.044!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x145840d5e2a6c6c7%3A0x5b6c8c9f4e6d7e8f!2sSaudi%20German%20Hospital%20Cairo!5e0!3m2!1sen!2seg!4v1699999999999!5m2!1sen!2seg"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d55251.35522394814!2d31.21632955!3d30.0444196!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x145840d5e2a6c6c7%3A0x5b6c8c9f4e6d7e8f!2sSaudi%20German%20Hospital%20Cairo!5e0!3m2!1sen!2seg!4v1699999999999!5m2!1sen!2seg"
                   width="100%"
                   height="100%"
                   style={{ border: 0 }}
@@ -108,10 +310,67 @@ const Contact = () => {
                   title="Hospital Location"
                 ></iframe>
               </div>
+              <div className="flex gap-2">
+                <motion.a
+                  whileHover={{ scale: 1.02 }}
+                  href="https://maps.google.com/?q=Saudi+German+Hospital+Cairo"
+                  target="_blank"
+                  className="flex-1 py-2 rounded-xl bg-blue-600/20 text-blue-400 text-center text-sm font-semibold hover:bg-blue-600/30 transition"
+                >
+                  فتح في خرائط جوجل
+                </motion.a>
+                <motion.a
+                  whileHover={{ scale: 1.02 }}
+                  href="https://waze.com/ul?q=Saudi%20German%20Hospital%20Cairo"
+                  target="_blank"
+                  className="flex-1 py-2 rounded-xl bg-purple-600/20 text-purple-400 text-center text-sm font-semibold hover:bg-purple-600/30 transition"
+                >
+                  فتح في Waze
+                </motion.a>
+              </div>
             </div>
           </motion.div>
         </div>
+
+        {/* Quick Call Button */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="text-center mt-8"
+        >
+          <motion.a
+            href="tel:+201069927168"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="inline-flex items-center gap-3 px-8 py-4 rounded-xl bg-gradient-to-r from-green-600 to-green-700 text-white font-bold text-lg hover:shadow-xl transition-all"
+          >
+            <FaPhoneVolume className="text-xl animate-pulse" />
+            اتصل الآن للاستشارة الفورية
+            <FaArrowRight />
+          </motion.a>
+        </motion.div>
       </div>
+
+      <style jsx>{`
+        .counter {
+          font-size: 16px;
+          padding: 5px 10px;
+          border-radius: 5px;
+          color: var(--accent);
+          background: var(--accent-bg);
+          border: 2px solid transparent;
+          transition: border-color 0.3s;
+          margin-bottom: 24px;
+        }
+        .counter:hover {
+          border-color: var(--accent-border);
+        }
+        .counter:focus-visible {
+          outline: 2px solid var(--accent);
+          outline-offset: 2px;
+        }
+      `}</style>
     </section>
   );
 };
