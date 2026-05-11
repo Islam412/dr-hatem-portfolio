@@ -4,7 +4,7 @@ import {
   FaFacebook, FaInstagram, FaTiktok, FaWhatsapp, 
   FaPhoneAlt, FaEnvelope, FaMapMarkerAlt, FaClock,
   FaCopy, FaCheck, FaStar, FaHeartbeat, FaArrowRight,
-  FaPhoneVolume, FaCalendarCheck, FaUserMd
+  FaPhoneVolume, FaCalendarCheck, FaUserMd, FaMobileAlt
 } from 'react-icons/fa';
 import { useState } from 'react';
 
@@ -25,10 +25,38 @@ const Contact = () => {
   ];
 
   const contactInfo = [
-    { icon: <FaPhoneAlt />, label: 'الهاتف', value: '+20 106 992 7168', href: 'tel:+201069927168', color: 'from-blue-500 to-blue-600' },
-    { icon: <FaWhatsapp />, label: 'واتساب', value: '+20 106 992 7168', href: 'https://wa.me/201069927168', color: 'from-green-500 to-green-600' },
-    { icon: <FaEnvelope />, label: 'البريد الإلكتروني', value: 'info@drhatem.com', href: 'mailto:info@drhatem.com', color: 'from-purple-500 to-purple-600' },
-    { icon: <FaMapMarkerAlt />, label: 'الموقع', value: 'المستشفى السعودي الألماني - مصر', href: '#', color: 'from-red-500 to-red-600' }
+    { 
+      icon: <FaPhoneAlt />, 
+      label: 'الهاتف', 
+      value: '+20 106 992 7168', 
+      displayValue: '+20 106 992 7168',
+      href: 'tel:+201069927168', 
+      color: 'from-blue-500 to-blue-600' 
+    },
+    { 
+      icon: <FaWhatsapp />, 
+      label: 'واتساب', 
+      value: '+20 106 992 7168', 
+      displayValue: '+20 106 992 7168',
+      href: 'https://wa.me/201069927168', 
+      color: 'from-green-500 to-green-600' 
+    },
+    { 
+      icon: <FaEnvelope />, 
+      label: 'البريد الإلكتروني', 
+      value: 'info@drhatem.com', 
+      displayValue: 'info@drhatem.com',
+      href: 'mailto:info@drhatem.com', 
+      color: 'from-purple-500 to-purple-600' 
+    },
+    { 
+      icon: <FaMapMarkerAlt />, 
+      label: 'الموقع', 
+      value: 'المستشفى السعودي الألماني - مصر', 
+      displayValue: 'المستشفى السعودي الألماني - مصر',
+      href: '#', 
+      color: 'from-red-500 to-red-600' 
+    }
   ];
 
   const copyPhone = () => {
@@ -63,7 +91,6 @@ const Contact = () => {
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-purple-900/10 to-blue-900/20"></div>
         
-        {/* دوائر ضوئية متحركة */}
         <motion.div
           animate={{
             scale: [1, 1.3, 1],
@@ -83,7 +110,6 @@ const Contact = () => {
           className="absolute bottom-20 -right-48 w-96 h-96 rounded-full bg-purple-500/20 blur-3xl"
         />
         
-        {/* جسيمات متحركة */}
         {particles.map((particle) => (
           <motion.div
             key={particle.id}
@@ -148,7 +174,7 @@ const Contact = () => {
             transition={{ duration: 0.6 }}
             className="space-y-4"
           >
-            {/* Contact Cards */}
+            {/* Contact Cards with Better Number Display */}
             <div className="glass-card p-6 rounded-2xl">
               <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
                 <FaUserMd className="text-blue-400" />
@@ -160,58 +186,107 @@ const Contact = () => {
                     key={index}
                     href={info.href}
                     whileHover={{ scale: 1.02, x: 5 }}
-                    className="flex items-center gap-4 p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-all group"
+                    className="flex items-center gap-4 p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-all group"
                   >
-                    <div className={`w-10 h-10 rounded-lg bg-gradient-to-r ${info.color} flex items-center justify-center text-white text-lg`}>
+                    <div className={`w-12 h-12 rounded-lg bg-gradient-to-r ${info.color} flex items-center justify-center text-white text-xl`}>
                       {info.icon}
                     </div>
                     <div className="flex-1">
-                      <p className="text-xs text-gray-400">{info.label}</p>
-                      <p className="text-sm text-white font-semibold">{info.value}</p>
+                      <p className="text-xs text-gray-400 mb-1">{info.label}</p>
+                      <p className="text-lg md:text-xl font-bold text-white tracking-wide">
+                        {info.label === 'الهاتف' || info.label === 'واتساب' ? (
+                          <>
+                            <span className="text-blue-400">+20</span>
+                            <span className="mx-1">106</span>
+                            <span className="mx-1">992</span>
+                            <span>7168</span>
+                          </>
+                        ) : (
+                          info.displayValue
+                        )}
+                      </p>
                     </div>
-                    <FaArrowRight className="text-gray-400 group-hover:text-white transition-colors" />
+                    <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-white/20 transition">
+                      <FaArrowRight className="text-gray-400 group-hover:text-white transition-colors text-sm" />
+                    </div>
                   </motion.a>
                 ))}
               </div>
             </div>
 
-            {/* Working Hours */}
+            {/* Working Hours - Improved */}
             <div className="glass-card p-6 rounded-2xl">
               <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
                 <FaClock className="text-green-400" />
                 ساعات العمل
               </h3>
               <div className="space-y-3">
-                <div className="flex justify-between items-center p-3 rounded-xl bg-white/5">
-                  <span className="text-gray-300">السبت - الأربعاء</span>
-                  <span className="text-white font-semibold">10:00 ص - 8:00 م</span>
+                <div className="flex justify-between items-center p-3 rounded-xl bg-white/5 hover:bg-white/10 transition">
+                  <div>
+                    <p className="text-gray-300 font-semibold">السبت - الأربعاء</p>
+                    <p className="text-xs text-gray-500">طوال الأسبوع</p>
+                  </div>
+                  <div className="text-left">
+                    <p className="text-white font-bold text-lg">10:00 ص - 8:00 م</p>
+                    <p className="text-xs text-green-400">متاح للاستشارات</p>
+                  </div>
                 </div>
-                <div className="flex justify-between items-center p-3 rounded-xl bg-white/5">
-                  <span className="text-gray-300">الخميس</span>
-                  <span className="text-white font-semibold">10:00 ص - 4:00 م</span>
+                <div className="flex justify-between items-center p-3 rounded-xl bg-white/5 hover:bg-white/10 transition">
+                  <div>
+                    <p className="text-gray-300 font-semibold">الخميس</p>
+                    <p className="text-xs text-gray-500">آخر الأسبوع</p>
+                  </div>
+                  <div className="text-left">
+                    <p className="text-white font-bold text-lg">10:00 ص - 4:00 م</p>
+                    <p className="text-xs text-yellow-400">مواعيد محدودة</p>
+                  </div>
                 </div>
-                <div className="flex justify-between items-center p-3 rounded-xl bg-white/5">
-                  <span className="text-gray-300">الجمعة</span>
-                  <span className="text-green-400 font-semibold">عطلة</span>
+                <div className="flex justify-between items-center p-3 rounded-xl bg-white/5 hover:bg-white/10 transition">
+                  <div>
+                    <p className="text-gray-300 font-semibold">الجمعة</p>
+                    <p className="text-xs text-gray-500">عطلة نهاية الأسبوع</p>
+                  </div>
+                  <div>
+                    <p className="text-green-400 font-bold text-lg">عطلة رسمية</p>
+                    <p className="text-xs text-gray-500">طوارئ فقط</p>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Quick Copy */}
-            <div className="glass-card p-6 rounded-2xl bg-gradient-to-r from-blue-600/20 to-purple-600/20">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm text-gray-300">رقم الهاتف السريع</p>
-                  <p className="text-2xl font-bold text-white">+20 106 992 7168</p>
+            {/* Quick Copy - Enhanced */}
+            <div className="glass-card p-6 rounded-2xl bg-gradient-to-r from-blue-600/20 to-purple-600/20 border border-blue-500/30">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+                <div className="text-center md:text-right">
+                  <p className="text-sm text-gray-300 mb-1 flex items-center gap-2 justify-center md:justify-start">
+                    <FaMobileAlt className="text-blue-400" />
+                    رقم الهاتف السريع
+                  </p>
+                  <div className="flex items-center gap-2 justify-center md:justify-start">
+                    <span className="text-2xl md:text-3xl font-bold text-white tracking-wider">+20</span>
+                    <span className="text-2xl md:text-3xl font-bold text-blue-400">106</span>
+                    <span className="text-2xl md:text-3xl font-bold text-white">992</span>
+                    <span className="text-2xl md:text-3xl font-bold text-white">7168</span>
+                  </div>
+                  <p className="text-xs text-gray-400 mt-1">متاح 24 ساعة للاستشارات العاجلة</p>
                 </div>
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   onClick={copyPhone}
-                  className="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 transition-all flex items-center gap-2"
+                  className="px-6 py-3 rounded-xl bg-white/10 hover:bg-white/20 transition-all flex items-center gap-2 border border-white/20"
                 >
-                  {copied ? <FaCheck className="text-green-400" /> : <FaCopy className="text-blue-400" />}
-                  <span className="text-sm">{copied ? 'تم النسخ' : 'نسخ'}</span>
+                  {copied ? (
+                    <>
+                      <FaCheck className="text-green-400 text-lg" />
+                      <span className="text-green-400 font-semibold">تم النسخ</span>
+                    </>
+                  ) : (
+                    <>
+                      <FaCopy className="text-blue-400 text-lg" />
+                      <span className="text-white font-semibold">نسخ الرقم</span>
+                    </>
+                  )}
                 </motion.button>
               </div>
             </div>
@@ -272,6 +347,7 @@ const Contact = () => {
                   onChange={handleChange}
                   required
                   className="w-full p-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 transition"
+                  dir="ltr"
                 />
                 <textarea
                   name="message"
@@ -351,26 +427,6 @@ const Contact = () => {
           </motion.a>
         </motion.div>
       </div>
-
-      <style jsx>{`
-        .counter {
-          font-size: 16px;
-          padding: 5px 10px;
-          border-radius: 5px;
-          color: var(--accent);
-          background: var(--accent-bg);
-          border: 2px solid transparent;
-          transition: border-color 0.3s;
-          margin-bottom: 24px;
-        }
-        .counter:hover {
-          border-color: var(--accent-border);
-        }
-        .counter:focus-visible {
-          outline: 2px solid var(--accent);
-          outline-offset: 2px;
-        }
-      `}</style>
     </section>
   );
 };
