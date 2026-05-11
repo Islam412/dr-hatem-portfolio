@@ -57,17 +57,14 @@ Built with **React + Vite** and styled using **Tailwind CSS** with smooth animat
   Your browser does not support the video tag.
 </video>
 
-> **Instructions:** 
-> 1. Place your video file in the `demo` folder as `video-demo.mp4`
-> 2. Or replace with your YouTube/Vimeo link
 
 ---
 
 ## 🚀 Getting Started (Local Development)
 
-### Prerequisites
-- Node.js (v18 or higher)
-- npm or yarn
+> ### Prerequisites
+>- Node.js (v18 or higher)
+>- npm or yarn
 
 ### Installation
 
